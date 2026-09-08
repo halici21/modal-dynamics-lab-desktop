@@ -526,26 +526,27 @@ export function createCadScene(
     update(frame) {
       if (!spec) return;
       if (spec.kind === "chain") {
-        const half = spec.span / 2;
+        const chainSpec = spec;
+        const half = chainSpec.span / 2;
         massMeshes.forEach((mesh, i) => {
-          mesh.position.x = spec!.kind === "chain" ? spec.positions[i] + (frame.offsets[i] ?? 0) : 0;
+          mesh.position.x = chainSpec.positions[i] + (frame.offsets[i] ?? 0);
         });
-        spec.springs.forEach((s, i) => {
+        chainSpec.springs.forEach((s, i) => {
           const mesh = springMeshes[i];
           if (!mesh) return;
           const a =
             s.from === null
               ? -half + 0.06
-              : massMeshes[s.from].position.x + (spec!.kind === "chain" ? spec.sizes[s.from] / 2 : 0);
+              : massMeshes[s.from].position.x + chainSpec.sizes[s.from] / 2;
           const b =
             s.to === null
               ? half - 0.06
-              : massMeshes[s.to].position.x - (spec!.kind === "chain" ? spec.sizes[s.to] / 2 : 0);
+              : massMeshes[s.to].position.x - chainSpec.sizes[s.to] / 2;
           const len = Math.max(0.25, b - a);
           mesh.position.set(a, 0, 0);
           mesh.scale.x = len;
         });
-        spec.dampers.forEach((d, i) => {
+        chainSpec.dampers.forEach((d, i) => {
           const group = damperGroups[i];
           if (!group) return;
           const a = d.from === null ? -half + 0.06 : massMeshes[d.from].position.x;
@@ -566,7 +567,7 @@ export function createCadScene(
             return;
           }
           arrow.visible = true;
-          const size = spec!.kind === "chain" ? spec.sizes[i] : 0.8;
+          const size = chainSpec.sizes[i] ?? 0.8;
           arrow.position.set(massMeshes[i].position.x, size * 0.75, 0);
           arrow.scale.set(Math.abs(f) * 1.4, 1, 1);
           arrow.rotation.y = f < 0 ? Math.PI : 0;

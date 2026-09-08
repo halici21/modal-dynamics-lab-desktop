@@ -976,7 +976,7 @@ function LiveForces({
   system: System | undefined;
   index: number;
 }) {
-  const root = useMemo(() => ({ current: null as HTMLDListElement | null }), []);
+  const root = useRef<HTMLDListElement>(null);
   useSubscribe(clock, (t) => {
     const s = sampler.sample(t);
     const el = root.current;
@@ -997,7 +997,7 @@ function LiveForces({
     write("residual", inertia + damping + stiffness);
   }, [sampler, system, index]);
   return (
-    <dl className="force-balance" ref={(el) => (root.current = el)}>
+    <dl className="force-balance" ref={root}>
       {[
         ["inertia", "m ẍ", "N"],
         ["damping", "c ẋ", "N"],
@@ -1024,7 +1024,7 @@ function LiveScalars({
   sampler: Sampler;
   index: number;
 }) {
-  const root = useMemo(() => ({ current: null as HTMLDListElement | null }), []);
+  const root = useRef<HTMLDListElement>(null);
   useSubscribe(clock, (t) => {
     const s = sampler.sample(t);
     const el = root.current;
@@ -1038,7 +1038,7 @@ function LiveScalars({
     set("v", s.v[index] ?? 0);
   }, [sampler, index]);
   return (
-    <dl className="live-scalars" ref={(el) => (root.current = el)}>
+    <dl className="live-scalars" ref={root}>
       {[
         ["E", "E", "J"],
         ["x", "x", "m"],

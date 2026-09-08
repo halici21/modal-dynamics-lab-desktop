@@ -41,14 +41,14 @@ const n = (v: number, d = 4) =>
 /* ------------------------------------------------------------------ */
 
 export function undampedSdofSteps(s: SdofSolution): DerivationStep[] {
-  const { mass, stiffness, x0, v0 } = s.parameters;
+  const { stiffness, x0, v0 } = s.parameters;
   return [
     {
       title: "Newton's second law",
       focus: [M, A],
       lines: [
         line("newton", [
-          g(String.raw`\sum F ="),
+          g(String.raw`\sum F =`),
           t(String.raw`m\ddot{x}`, [M, A], "mass times acceleration"),
         ]),
       ],
@@ -60,7 +60,7 @@ export function undampedSdofSteps(s: SdofSolution): DerivationStep[] {
       focus: [K, X],
       lines: [
         line("hooke", [
-          g(String.raw`F_s ="),
+          g(String.raw`F_s =`),
           g("-"),
           t(String.raw`k`, [K], "stiffness k"),
           t(String.raw`x`, [X], "displacement x"),
