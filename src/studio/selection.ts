@@ -60,6 +60,7 @@ export interface LinkRef {
   i: number;
   j: number | null;
   k: number;
+  c?: number;
   label?: string;
 }
 
