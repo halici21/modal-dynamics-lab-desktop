@@ -194,6 +194,8 @@ export const STUDY_GROUPS = [...new Set(STUDIES.map((s) => s.group))];
 export interface TreeNode {
   id: string;
   label: string;
+  /** Secondary value, rendered muted beside the name rather than glued on. */
+  detail?: string;
   kind: string;
   token?: string;
   selection: StudioSelection;
@@ -245,7 +247,8 @@ export function chainTree(
       if (before)
         model.push({
           id: `spring-${li}`,
-          label: `Spring · ${l.label ?? "k" + (li + 1)} = ${l.k} N/m`,
+          label: l.label ?? "k" + (li + 1),
+          detail: `${l.k} N/m`,
           kind: "Spring",
           token: token.spring(li),
           selection: { kind: "spring", index: li },
@@ -254,7 +257,8 @@ export function chainTree(
     });
     model.push({
       id: `mass-${i}`,
-      label: `Mass · m${i + 1} = ${system.M[i][i]} kg`,
+      label: `m${i + 1}`,
+      detail: `${system.M[i][i]} kg`,
       kind: "Mass",
       token: token.mass(i),
       selection: { kind: "mass", index: i },
@@ -263,7 +267,7 @@ export function chainTree(
     if (extras.damped && system.C[i]?.[i])
       model.push({
         id: `damper-${i}`,
-        label: `Damper · c${i + 1}`,
+        label: `c${i + 1}`,
         kind: "Damper",
         token: token.damper(i),
         selection: { kind: "damper", index: i },
@@ -275,7 +279,8 @@ export function chainTree(
       model.push(
         {
           id: `spring-${li}`,
-          label: `Spring · ${l.label ?? "k" + (li + 1)} = ${l.k} N/m`,
+          label: l.label ?? "k" + (li + 1),
+          detail: `${l.k} N/m`,
           kind: "Spring",
           token: token.spring(li),
           selection: { kind: "spring", index: li },
@@ -300,7 +305,8 @@ export function chainTree(
     collapsible: true,
     nodes: system.M.map((_, i) => ({
       id: `dof-${i}`,
-      label: `${system.labels[i]} · x₀ ${extras.x0[i] ?? 0}, v₀ ${extras.v0[i] ?? 0}`,
+      label: system.labels[i],
+      detail: `x₀ ${extras.x0[i] ?? 0}, v₀ ${extras.v0[i] ?? 0}`,
       kind: "DOF",
       token: token.displacement(i),
       selection: { kind: "dof", index: i } as StudioSelection,
@@ -311,11 +317,12 @@ export function chainTree(
   if (modal)
     groups.push({
       id: "study",
-      label: `Study · ${study.name}`,
+      label: `Study: ${study.name}`,
       collapsible: modal.modes.length > 6,
       nodes: modal.modes.map((m, i) => ({
         id: `mode-${i}`,
-        label: `Mode ${i + 1} · ${m.frequency.toFixed(4)} Hz${m.kind === "zero" ? " · rigid" : ""}`,
+        label: `Mode ${i + 1}`,
+        detail: `${m.frequency.toFixed(4)} Hz${m.kind === "zero" ? ", rigid" : ""}`,
         kind: "Mode",
         token: token.mode(i),
         selection: { kind: "mode", index: i } as StudioSelection,
@@ -329,7 +336,8 @@ export function chainTree(
     collapsible: true,
     nodes: (["M", "C", "K"] as const).map((m) => ({
       id: `matrix-${m}`,
-      label: `${m} · ${system.M.length}×${system.M.length}`,
+      label: m,
+      detail: `${system.M.length}×${system.M.length}`,
       kind: "Matrix",
       selection: { kind: "matrix", matrix: m, row: 0, col: 0 } as StudioSelection,
       depth: 1,
@@ -352,7 +360,8 @@ export function feTree(
       collapsible: assembly.nodes.length > 6,
       nodes: assembly.nodes.map((p, i) => ({
         id: `node-${i}`,
-        label: `Node ${i + 1} · (${p[0].toFixed(3)}, ${p[1].toFixed(3)}) m`,
+        label: `Node ${i + 1}`,
+        detail: `(${p[0].toFixed(3)}, ${p[1].toFixed(3)}) m`,
         kind: "Node",
         token: token.node(i),
         selection: { kind: "node", index: i } as StudioSelection,
@@ -365,7 +374,8 @@ export function feTree(
       collapsible: assembly.elementData.length > 6,
       nodes: assembly.elementData.map((e, i) => ({
         id: `element-${i}`,
-        label: `${kind} ${i + 1} · nodes ${e.nodes[0] + 1}–${e.nodes[1] + 1} · L ${e.L.toFixed(3)} m`,
+        label: `${kind} ${i + 1}`,
+        detail: `nodes ${e.nodes[0] + 1}–${e.nodes[1] + 1}, L ${e.L.toFixed(3)} m`,
         kind: "Element",
         token: token.element(i),
         selection: { kind: "element", index: i } as StudioSelection,
@@ -379,14 +389,16 @@ export function feTree(
       nodes: [
         {
           id: "material",
-          label: `E ${assembly.elementData[0].material.E.toExponential(1)} Pa · ρ ${assembly.elementData[0].material.rho} kg/m³`,
+          label: "Material",
+          detail: `E ${assembly.elementData[0].material.E.toExponential(1)} Pa, ρ ${assembly.elementData[0].material.rho} kg/m³`,
           kind: "Material",
           selection: { kind: "element", index: 0 } as StudioSelection,
           depth: 1,
         },
         {
           id: "section",
-          label: `A ${assembly.elementData[0].section.A} m² · I ${assembly.elementData[0].section.I.toExponential(0)} m⁴`,
+          label: "Section",
+          detail: `A ${assembly.elementData[0].section.A} m², I ${assembly.elementData[0].section.I.toExponential(0)} m⁴`,
           kind: "Section",
           selection: { kind: "element", index: 0 } as StudioSelection,
           depth: 1,
@@ -400,7 +412,8 @@ export function feTree(
       nodes: assembly.fixed.length
         ? assembly.fixed.map((d) => ({
             id: `fixed-${d}`,
-            label: `Fixed · ${assembly.labels[d]}`,
+            label: assembly.labels[d],
+            detail: "fixed",
             kind: "Support",
             selection: {
               kind: "node",
@@ -411,7 +424,8 @@ export function feTree(
         : [
             {
               id: "unconstrained",
-              label: "No essential constraint · free-free",
+              label: "No essential constraint",
+              detail: "free-free",
               kind: "Support",
               selection: null,
               depth: 1,
@@ -426,7 +440,8 @@ export function feTree(
       collapsible: modal.modes.length > 6,
       nodes: modal.modes.map((m, i) => ({
         id: `mode-${i}`,
-        label: `Mode ${i + 1} · ${m.frequency.toFixed(4)} Hz${m.kind === "zero" ? " · rigid" : ""}`,
+        label: `Mode ${i + 1}`,
+        detail: `${m.frequency.toFixed(4)} Hz${m.kind === "zero" ? ", rigid" : ""}`,
         kind: "Mode",
         token: token.mode(i),
         selection: { kind: "mode", index: i } as StudioSelection,
@@ -439,7 +454,8 @@ export function feTree(
     collapsible: true,
     nodes: (["M", "K"] as const).map((m) => ({
       id: `matrix-${m}`,
-      label: `Reduced ${m} · ${assembly.system.M.length}×${assembly.system.M.length}`,
+      label: `Reduced ${m}`,
+      detail: `${assembly.system.M.length}×${assembly.system.M.length}`,
       kind: "Matrix",
       selection: { kind: "matrix", matrix: m, row: 0, col: 0 } as StudioSelection,
       depth: 1,
