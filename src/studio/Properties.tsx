@@ -23,6 +23,7 @@ import {
   PropertyState,
 } from "./PropertyManager";
 import { token, type LinkRef, type StudioSelection } from "./selection";
+import { StudySettings, type StudySettingsProps } from "./StudySettings";
 
 export interface PropertyContext {
   clock: SimulationClock;
@@ -46,12 +47,16 @@ export interface PropertyContext {
   onInitial(index: number, key: "x0" | "v0", value: number): void;
   onAmplitude(value: number): void;
   onSelect(s: StudioSelection): void;
+  /** The study root node's own settings page. */
+  studySettings: StudySettingsProps;
 }
 
 export function propertyTitle(ctx: PropertyContext): string {
   const s = ctx.selection;
   if (!s) return "Properties";
   switch (s.kind) {
+    case "study":
+      return "Study settings";
     case "mass":
       return `Mass · m${s.index + 1}`;
     case "spring":
@@ -78,6 +83,7 @@ export function propertyTitle(ctx: PropertyContext): string {
 export function Properties(ctx: PropertyContext) {
   const s = ctx.selection;
   if (!s) return <PropertyEmpty density={ctx.density} />;
+  if (s.kind === "study") return <StudySettings {...ctx.studySettings} />;
   const { system, modal, sampler, links, active, clock } = ctx;
 
   if ((s.kind === "mass" || s.kind === "dof") && system) {

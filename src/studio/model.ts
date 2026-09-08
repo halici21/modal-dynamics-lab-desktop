@@ -213,6 +213,29 @@ export interface TreeGroup {
 const FIXED = { collapsible: false };
 
 /**
+ * The root node. COMSOL precedent: selecting it opens the study's own
+ * Settings page rather than an object's, which is where every study-level
+ * parameter (DOF count, boundary, damping model, mesh, excitation) lives.
+ */
+function studyRoot(study: Study): TreeGroup {
+  return {
+    id: "root",
+    label: "Study",
+    collapsible: false,
+    nodes: [
+      {
+        id: "study-root",
+        label: study.name,
+        detail: "settings",
+        kind: "Study",
+        selection: { kind: "study" },
+        depth: 0,
+      },
+    ],
+  };
+}
+
+/**
  * Build the semantic tree for a chain / SDOF study straight from the assembled
  * `System` (its `links` array is the solver's own object list).
  */
@@ -223,7 +246,7 @@ export function chainTree(
   extras: { x0: number[]; v0: number[]; damped: boolean },
 ): TreeGroup[] {
   const links = (system.links ?? []) as LinkRef[];
-  const groups: TreeGroup[] = [];
+  const groups: TreeGroup[] = [studyRoot(study)];
   const model: TreeNode[] = [];
   const grounded = links.filter((l) => l.j === null);
 
@@ -352,8 +375,10 @@ export function feTree(
   assembly: ReturnType<typeof assembleFE>,
   modal: Modal | undefined,
   kind: string,
+  study?: Study,
 ): TreeGroup[] {
   const groups: TreeGroup[] = [
+    ...(study ? [studyRoot(study)] : []),
     {
       id: "geometry-nodes",
       label: "Geometry · Nodes",

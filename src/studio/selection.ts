@@ -10,6 +10,7 @@
  */
 
 export type StudioSelection =
+  | { kind: "study" }
   | { kind: "mass"; index: number }
   | { kind: "spring"; index: number }
   | { kind: "damper"; index: number }
@@ -46,6 +47,7 @@ export const token = {
 
 export function selectionKey(s: StudioSelection): string {
   if (!s) return "none";
+  if (s.kind === "study") return "study";
   if (s.kind === "matrix") return `matrix:${s.matrix}:${s.row}:${s.col}`;
   if (s.kind === "term") return `term:${s.token}`;
   return `${s.kind}:${s.index}`;
@@ -90,6 +92,8 @@ export function activeTokens(
   };
 
   switch (selection.kind) {
+    case "study":
+      break;
     case "mass":
     case "dof": {
       const i = selection.index;

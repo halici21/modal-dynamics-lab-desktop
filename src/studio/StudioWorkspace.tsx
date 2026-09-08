@@ -169,6 +169,7 @@ export function StudioWorkspace({
   const [tracking, setTracking] = useState(
     "Frequency order; no parameter change yet.",
   );
+  const [settingsError, setSettingsError] = useState("");
   const previousModal = useRef<Modal | null>(null);
 
   /* Study switch resets the study-scoped state but keeps density and panes. */
@@ -458,7 +459,7 @@ export function StudioWorkspace({
 
   /* ---------------- browser tree ---------------- */
   const tree: TreeGroup[] = useMemo(() => {
-    if (study.stage === "fe" && assembly) return feTree(assembly, modal, element);
+    if (study.stage === "fe" && assembly) return feTree(assembly, modal, element, study);
     if (!system) {
       if (!sdofSolution) return [];
       return chainTree(
@@ -671,6 +672,43 @@ export function StudioWorkspace({
     onInitial,
     onAmplitude: (v) => setAmplitude(v),
     onSelect: select,
+    studySettings: {
+      study,
+      modal,
+      n,
+      onN: (v) => edit(() => setN(v)),
+      boundary,
+      onBoundary: (b) => edit(() => setBoundary(b)),
+      alpha,
+      beta,
+      onRayleigh: (a, b) =>
+        edit(() => {
+          setAlpha(a);
+          setBeta(b);
+        }),
+      sdofC,
+      onSdofC: (v) => edit(() => setSdofC(v)),
+      preview,
+      onPreview: (v) => edit(() => setPreview(v)),
+      amplitude,
+      onAmplitude: setAmplitude,
+      element,
+      onElement: (v) => edit(() => setElement(v)),
+      mesh,
+      onMesh: (v) => edit(() => setMesh(v)),
+      feBoundary,
+      onFeBoundary: (v) => edit(() => setFeBoundary(v)),
+      omega,
+      onOmega: (v) => edit(() => setOmega(v)),
+      force,
+      onForce: (v) => edit(() => setForce(v)),
+      forcePhase,
+      onForcePhase: (v) => edit(() => setForcePhase(v)),
+      baseAmplitude,
+      onBaseAmplitude: (v) => edit(() => setBaseAmplitude(v)),
+      error: settingsError,
+      onError: setSettingsError,
+    },
   };
 
   /* ---------------- dock ---------------- */
