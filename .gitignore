@@ -66,3 +66,6 @@ temp/
 
 # Packaged desktop deliverables
 artifacts/
+
+# Local pre-release backups
+backups/

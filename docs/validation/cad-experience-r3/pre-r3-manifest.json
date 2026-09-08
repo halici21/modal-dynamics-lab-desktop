@@ -1,0 +1,58 @@
+{
+  "release": "CAD EXPERIENCE R3",
+  "snapshotOf": "pre-R3 baseline",
+  "gitBaselineCommit": "963ca83",
+  "capturedAt": "2026-09-08T15:07:36.891Z",
+  "packageVersion": "0.4.0",
+  "tauriVersion": "0.4.0",
+  "packagedArtifacts": [
+    "Modal Dynamics Lab_0.0.1_x64-setup.exe",
+    "Modal Dynamics Lab_0.1.0_x64-setup.exe",
+    "Modal Dynamics Lab_0.2.0_x64-setup.exe",
+    "Modal Dynamics Lab_0.2.1_x64-setup.exe",
+    "Modal Dynamics Lab_0.3.0_x64-setup.exe",
+    "Modal Dynamics Lab_0.4.0_x64-setup.exe",
+    "modal-dynamics-lab.exe"
+  ],
+  "tests": {
+    "vitest": {
+      "command": "npm test",
+      "files": 7,
+      "passed": 85,
+      "failed": 0,
+      "note": "Measured 2026-09-08 on commit 963ca83. The brief quoted an 81-test physics baseline; the repository actually runs 85 vitest tests (63 physics/numerical in sdof+damping+full-physics, 22 clock/lifecycle/foundation/pedagogy)."
+    },
+    "playwright": {
+      "command": "npm run test:ui",
+      "passed": 100,
+      "failed": 0,
+      "note": "Measured 2026-09-08 on commit 963ca83. The brief quoted 96; the repository actually runs 100 interaction/accessibility/visual tests."
+    }
+  },
+  "physicsFrozenFiles": {
+    "src/physics/common.ts": "cb43ae65bf6dc339898b6516ec4226b253b6eea9321d25b8091b1b4d93b37f82",
+    "src/physics/contracts.ts": "da62bacdcd8ad11833045bee9983323596835380eb54e6e07c581941eead9ca7",
+    "src/physics/dampedEquations.ts": "91d0fec661317f697a9a642b1d041439159697dc627e8517c6df78fd92ea35d9",
+    "src/physics/dampingControl.ts": "61e42f73864e710f02bac37b60f7c6e202b1203dbbf25fdc3029354e8e540b3e",
+    "src/physics/dynamics.ts": "5e9cc16100a9a042275b0a1211d5576682c1c362285f0ecd99ed71adffc88a4c",
+    "src/physics/fem.ts": "cd9de1a38b44da798c74fdb8544b6594c5c40591aebdc86de0b65afb97aff3ba",
+    "src/physics/frequency.ts": "1dc6b9a406d599f8cac0089a3f7ef1ea9d4bb951af1463ea6d082fe968198f0a",
+    "src/physics/modal.ts": "2e05d99c061f78b548c38a70b388dc808738d90d68c7d77ae36e4697bfd8cc67",
+    "src/physics/rigid.ts": "00fbecc483394c78628f073f812b7f1cb7868e6646a8e1a9cd609f0ea791d6a6",
+    "src/physics/sdof.ts": "e42c9f8f3bc8a35aad61acf41417620571d23e7655b64a0f0468e55f13243d9e",
+    "src/physics/spectra.ts": "5f1103501d2d9ca8a0948350bcc4521148914736f4cfe79161bc45ea630e9036",
+    "src/physics/systems.ts": "702fa5ef9c020411dea99d3092fcd5d9e34bf4a2916b184a15a062a5f3113ee0",
+    "src/animation/SimulationClock.ts": "cf9be7bf2557a656cbbda3e4247fadd93101e39465b72a69156cd84a3be95996",
+    "src/animation/lifecycle.ts": "cf4bca8275be9a8d6d1c471f24474a1779c4d5ab0c379993dd4c6e4a1abd27e8",
+    "src/animation/motion.ts": "dbc61082ad1f522df493cee96652896e914d225823eafdbfc35f1f750a02c853"
+  },
+  "screenshots": {
+    "before": "docs/validation/cad-experience-r3/screenshots/before/",
+    "note": "15 pre-R3 frames at 1440x900, 900x680, 1920x1009 and 1100x760. Two setup steps (mass selection, theme toggle) did not apply before their capture, so those frames show the default state."
+  },
+  "backup": {
+    "path": "backups/",
+    "gitignored": true,
+    "note": "Timestamped copy of src/ before R3 edits."
+  }
+}
