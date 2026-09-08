@@ -36,6 +36,8 @@ import {
 import { ResponsePlot } from "../visualization/ResponsePlot";
 import { SdofInspector, SdofLens } from "../visualization/SdofInspection";
 import { RendererStudy } from "../visualization/RendererStudy";
+import { ShellPrototypes } from "./prototypes/ShellPrototypes";
+import "./prototypes/prototypes.css";
 import { LearningPanel } from "../education/LearningPanel";
 import { lessonForModule } from "../education/curriculum";
 import { usePedagogyProgress } from "../education/progress";
@@ -226,8 +228,11 @@ export function App({ clock }: { clock: SimulationClock }) {
       },
     });
   };
-  if (new URLSearchParams(window.location.search).get("r2") === "renderer-study")
-    return <RendererStudy clock={clock} />;
+  const query = new URLSearchParams(window.location.search);
+  if (query.get("r2") === "renderer-study") return <RendererStudy clock={clock} />;
+  const shell = query.get("r3");
+  if (shell === "shell-a" || shell === "shell-b" || shell === "shell-c")
+    return <ShellPrototypes clock={clock} which={shell} />;
   return (
     <div
       className="lab sdof-lab workbench-lab"

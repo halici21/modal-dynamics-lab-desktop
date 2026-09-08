@@ -88,6 +88,26 @@ const SETS = {
     ["14-maximized", [1920, 1009], async () => {}],
     ["15-intermediate", [1100, 760], async () => {}],
   ],
+  prototypes: ["a", "b", "c"].flatMap((s) =>
+    [
+      ["1440x900", [1440, 900]],
+      ["1100x760", [1100, 760]],
+      ["900x680", [900, 680]],
+    ].map(([label, vp]) => [
+      `shell-${s}-${label}`,
+      vp,
+      async (page) => {
+        await page.goto(`${BASE}/?r3=shell-${s}`);
+        await page.waitForTimeout(500);
+        if (s === "a")
+          await page.getByRole("button", { name: "Items" }).click();
+        if (s !== "b")
+          await page
+            .getByRole("button", { name: "Select mass m1" })
+            .click({ force: true });
+      },
+    ]),
+  ),
 };
 
 async function workspace(page, index) {
