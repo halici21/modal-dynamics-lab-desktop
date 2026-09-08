@@ -3,6 +3,7 @@ import type { SimulationClock } from "../animation/SimulationClock";
 import { chain } from "../physics/systems";
 import { modalResponse, solveModal } from "../physics/modal";
 import { rendererDefaults } from "../design/visualization";
+import "./rendererStudy.css";
 
 type Prototype = "svg" | "three-2.5d" | "three-spatial";
 const names: Record<Prototype, string> = {

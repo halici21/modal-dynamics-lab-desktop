@@ -1,4 +1,12 @@
-import type { Lens } from "../app/state";
+/** The R2 lens vocabulary, kept local now that the R3 shell replaced
+ *  app/state's lens reducer with the studio's dock tabs. */
+export type Lens =
+  | "Motion"
+  | "Forces"
+  | "Energy"
+  | "Mode Shape"
+  | "Phase Space"
+  | "Mathematics";
 export const modules = [
   {
     name: "SDOF",

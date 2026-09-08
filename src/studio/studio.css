@@ -27,6 +27,25 @@
             animations, no hover transitions on panels.
    ========================================================================== */
 
+/* Global reset, carried over from the retired app/styles.css. */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--surface-base);
+  color: var(--text);
+  font-size: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 :root {
   --studio-bar: 40px;
   --studio-browser: 196px;

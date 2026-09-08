@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import { App } from "./app/App";
 import { SimulationClock } from "./animation/SimulationClock";
 import "./app/tokens.css";
-import "./app/styles.css";
 const clock = new SimulationClock();
 const root = createRoot(document.getElementById("root")!);
 let commits = 0;

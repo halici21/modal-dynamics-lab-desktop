@@ -1,0 +1,59 @@
+/* R2 renderer study (evidence page at ?r2=renderer-study).
+   Extracted from the retired app/styles.css during CAD EXPERIENCE R3 so the
+   recorded renderer-decision evidence keeps rendering after the shell swap.
+   These tokens are local to this page and deliberately not part of the
+   studio's semantic palette. */
+.r2-study {
+  --surface-workspace: #111419;
+  --surface-chrome: #171a20;
+  --structure: #7e8b96;
+  --text-bright: #f4f6f8;
+  --shadow-stage: inset 0 1px 0 #ffffff08, 0 20px 60px #00000024;
+  --grid-line: #8aa0b814;
+}
+:root[data-theme="light"] .r2-study {
+  --surface-workspace: #f4f4f1;
+  --surface-chrome: #e7e9e7;
+  --structure: #65727c;
+  --text-bright: #182127;
+  --shadow-stage: inset 0 1px 0 #ffffffaa, 0 20px 60px #66707a18;
+  --grid-line: #54717d18;
+}
+.r2-study button {
+  font: inherit;
+  color: inherit;
+  background: var(--surface-chrome);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.r2-study { min-height: 100vh; background: var(--surface-workspace); color: var(--text); padding: 34px clamp(20px, 4vw, 68px) 54px; }
+.r2-study-header { display: flex; justify-content: space-between; gap: 30px; max-width: 1320px; margin: 0 auto 26px; }
+.r2-kicker, .r2-stage-eyebrow { color: var(--displacement); font-size: 10px; letter-spacing: .16em; font-weight: 750; text-transform: uppercase; }
+.r2-study h1 { font-size: clamp(30px, 4vw, 52px); letter-spacing: -.05em; color: var(--text-bright); margin: 8px 0; }
+.r2-study-header p { max-width: 600px; font-size: 15px; }
+.r2-study-meta { display: flex; gap: 9px; align-items: flex-start; flex-wrap: wrap; justify-content: flex-end; }
+.r2-study-meta span, .r2-renderer-status { border: 1px solid var(--border); background: var(--surface-chrome); color: var(--text-muted); border-radius: 999px; padding: 7px 11px; font-size: 11px; }
+.r2-prototype-tabs { display: flex; gap: 8px; max-width: 1320px; margin: 0 auto 14px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+.r2-prototype-tabs button { min-height: 38px; }
+.r2-prototype-tabs button[aria-pressed="true"] { border-color: var(--displacement); color: var(--displacement); background: color-mix(in srgb, var(--displacement) 12%, transparent); }
+.r2-study-stage { position: relative; max-width: 1320px; height: min(58vh, 610px); min-height: 330px; margin: 0 auto; padding: 22px; overflow: hidden; background: radial-gradient(ellipse at 50% 42%, color-mix(in srgb, var(--displacement) 10%, transparent), transparent 63%), repeating-linear-gradient(0deg, transparent 0 39px, var(--grid-line) 40px), var(--surface-stage); border: 1px solid var(--border); box-shadow: var(--shadow-stage); }
+.r2-stage-eyebrow { position: absolute; z-index: 2; top: 21px; left: 22px; }
+.r2-prototype-svg, .r2-three-host { width: 100%; height: 100%; display: block; }
+.r2-prototype-svg { padding-top: 32px; }
+.study-rail { stroke: var(--structure); stroke-width: 3; }
+.study-support { stroke: var(--structure); stroke-width: 2; }
+.study-datum { stroke: var(--grid-line); stroke-dasharray: 4 5; }
+.study-mass { fill: color-mix(in srgb, var(--displacement) 22%, var(--surface-raised)); stroke: var(--displacement); stroke-width: 2; }
+.study-label { fill: var(--text-bright); font: 650 15px var(--font-ui); }
+.study-caption { fill: var(--text-muted); font: 12px var(--font-ui); }
+.r2-three-host { position: relative; }
+.r2-three-host canvas { width: 100% !important; height: 100% !important; display: block; }
+.r2-renderer-status { position: absolute; right: 14px; top: 10px; z-index: 2; }
+.r2-study-notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 1320px; margin: 14px auto 0; background: var(--border); border: 1px solid var(--border); }
+.r2-study-notes > div { background: var(--surface-chrome); padding: 16px; display: grid; gap: 7px; }
+.r2-study-notes strong { color: var(--text-bright); font-size: 12px; }
+.r2-study-notes span { color: var(--text-muted); line-height: 1.5; font-size: 12px; }
+@media (max-width: 720px) { .r2-study-header { display: block; } .r2-study-meta { justify-content: flex-start; margin-top: 14px; } .r2-study-notes { grid-template-columns: 1fr; } .r2-prototype-tabs { overflow-x: auto; } }
