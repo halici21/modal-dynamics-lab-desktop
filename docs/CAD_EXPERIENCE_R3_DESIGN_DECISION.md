@@ -125,5 +125,5 @@ Per the brief, rejected shell runtime paths are removed after the decision.
 `src/app/prototypes/` (all three shells, A and B included, plus C which is
 superseded by the production implementation) and its `?r3=` entry point are
 deleted in the GATE 5 commit. The screenshots, the measurements above, and this
-document remain as the record. Commit `a51fd6a` is the last commit in which the
+document remain as the record. Commit `972ed6a` is the last commit in which the
 prototypes are runnable.
