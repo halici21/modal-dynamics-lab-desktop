@@ -1,0 +1,12 @@
+[package]
+name = "modal-dynamics-lab"
+version = "0.4.0"
+description = "Local-first modal dynamics learning instrument"
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+

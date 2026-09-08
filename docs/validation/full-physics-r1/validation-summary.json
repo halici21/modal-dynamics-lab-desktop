@@ -1,0 +1,25 @@
+{
+  "release": "FULL PHYSICS COMPLETION R1",
+  "version": "0.3.0",
+  "date": "2026-09-08T15:09:07.1760315+03:00",
+  "verdict": "PASS WITH NOTES",
+  "unitTests": "81 passed",
+  "uiTests": "90 passed",
+  "typecheck": "passed",
+  "frontendBuild": "passed",
+  "desktopBuild": "passed",
+  "installerExitCode": 0,
+  "productionExeSha256": "79C9146B1C8E04D05F60C5B1999BB367AC24D49FFB7EA7542E35D885FE958D29",
+  "installerSha256": "5FFCE8BE43EC5F7E1687935C091F03A4448722274D364E87D7E355DA038F55E9",
+  "installedExeSha256": "DB6F069097B80E96B10880D73C065D4EB5E18B6E9336FAA888219C5482B71960",
+  "offlineModules": 13,
+  "offlinePageErrors": 0,
+  "minimumClient": "900x680",
+  "maximizedClient": "1920x1009",
+  "nativeDpr": 1,
+  "notes": [
+    "Installer-extracted EXE hash differs from standalone artifact; both smoke-tested.",
+    "Physical multi-monitor DPI, clean VM and code-signing validation remain open.",
+    "No UI redesign or Three.js/WebGPU work was started."
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "minimum": {
+    "viewport": [
+      900,
+      680
+    ],
+    "dpr": 1,
+    "overflow": false
+  },
+  "minimumDamped": {
+    "time": "000.10",
+    "live": [
+      [
+        "x",
+        "0.0595"
+      ],
+      [
+        "v",
+        "-0.6939"
+      ],
+      [
+        "a",
+        "-3.1741"
+      ],
+      [
+        "force",
+        "-5.9497"
+      ]
+    ],
+    "parametersButton": true,
+    "overflow": false
+  }
+}

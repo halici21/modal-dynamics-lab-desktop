@@ -1,0 +1,13 @@
+{
+  "method": "Production WebView2 renderer TaskDuration / wall duration; three-second windows; garbage collected before node/listener comparisons; not whole-process CPU",
+  "cycleState": "Pause",
+  "beforeCyclesPercent": 16.187423558985707,
+  "afterCyclesPercent": 15.267440232463231,
+  "pausedPercent": 0.07304175454147255,
+  "listenersBefore": 186,
+  "listenersAfter": 186,
+  "nodesBefore": 354,
+  "nodesAfter": 838,
+  "settledNodes": 352,
+  "settledListeners": 186
+}

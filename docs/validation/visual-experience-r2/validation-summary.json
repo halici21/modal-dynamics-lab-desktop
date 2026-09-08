@@ -1,0 +1,58 @@
+{
+  "release": "Visual Experience R2",
+  "version": "0.4.0",
+  "validatedAt": "2026-09-08T16:13:22.070907+03:00",
+  "rendererStudy": {
+    "case": "3DOF fixed-fixed chain",
+    "solution": "solveModal + modalResponse",
+    "prototypes": [
+      "A · Refined SVG",
+      "B · Three.js 2.5D",
+      "C · Spatial Three.js"
+    ],
+    "production": "A · Refined SVG",
+    "status": "A/B/C mounted on a shared SimulationClock; B/C lazy loaded",
+    "screenshots": [
+      "prototype-a-svg.png",
+      "prototype-b-three-2.5d.png",
+      "prototype-c-three-spatial.png"
+    ]
+  },
+  "tests": {
+    "physics": "81 passed",
+    "ui": "96 passed",
+    "typecheck": "passed",
+    "build": "passed",
+    "desktopBuild": "passed",
+    "visualBaselines": "47 full-r2 PNG baselines"
+  },
+  "performance": {
+    "browser": "60.006 fps; 16.665 ms average; worst 16.8 ms; 0 React commits during playback; 17.5 ms next-frame p95",
+    "cycles": "1000 play/pause cycles; activeLoops 0 after stop",
+    "bundle": "main 687.72 kB; lazy Three.js 704.69 kB; gzip 211.15 kB + 181.05 kB"
+  },
+  "native": {
+    "desktop": "Tauri 2 dev and release build passed",
+    "previousNativeEvidence": "165 Hz native 10DOF loop: ~164.858 fps, ~6.066 ms average, one loop; minimize paused frames; packaged offline 13-workspace sweep passed",
+    "installer": "Modal Dynamics Lab_0.4.0_x64-setup.exe",
+    "packagedLaunch": "modal-dynamics-lab.exe started successfully for a 4-second offline launch smoke and was closed cleanly",
+    "artifactBytes": 10719744,
+    "installerBytes": 266130987,
+    "artifactSha256": "25CA01627C78AD58C3534778CC3D6F6411C544978253F96F00F506885BB3C2FE",
+    "installerSha256": "5FC8CBF3E506D1648719C97C4FFDC16E6D58922D7D615FFA32494CEB32B9758E"
+  },
+  "physicsHashes": {
+    "src/physics/dampingControl.ts": "61E42F73864E710F02BAC37B60F7C6E202B1203DBBF25FDC3029354E8E540B3E",
+    "src/physics/rigid.ts": "00FBECC483394C78628F073F812B7F1CB7868E6646A8E1A9CD609F0EA791D6A6",
+    "src/physics/frequency.ts": "1DC6B9A406D599F8CAC0089A3F7EF1EA9D4BB951AF1463EA6D082FE968198F0A",
+    "src/physics/sdof.ts": "E42C9F8F3BC8A35AAD61ACF41417620571D23E7655B64A0F0468E55F13243D9E",
+    "src/physics/fem.ts": "CD9DE1A38B44DA798C74FDB8544B6594C5C40591AEBDC86DE0B65AFB97AFF3BA",
+    "src/physics/modal.ts": "2E05D99C061F78B548C38A70B388DC808738D90D68C7D77AE36E4697BFD8CC67",
+    "src/physics/common.ts": "CB43AE65BF6DC339898B6516EC4226B253B6EEA9321D25B8091B1B4D93B37F82",
+    "src/physics/spectra.ts": "5F1103501D2D9CA8A0948350BCC4521148914736F4CFE79161BC45EA630E9036",
+    "src/physics/dynamics.ts": "5E9CC16100A9A042275B0A1211D5576682C1C362285F0ECD99ED71ADFFC88A4C",
+    "src/animation/lifecycle.ts": "CF4BCA8275BE9A8D6D1C471F24474A1779C4D5AB0C379993DD4C6E4A1ABD27E8",
+    "src/animation/SimulationClock.ts": "CF9BE7BF2557A656CBBDA3E4247FADD93101E39465B72A69156CD84A3BE95996",
+    "src/physics/systems.ts": "702FA5EF9C020411DEA99D3092FCD5D9E34BF4A2916B184A15A062A5F3113EE0"
+  }
+}

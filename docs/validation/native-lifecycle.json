@@ -1,0 +1,53 @@
+{
+  "minimizedBefore": {
+    "time": 18.025599999994196,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": true
+    },
+    "diagnostics": {
+      "fps": 164.81252575195583,
+      "averageMs": 6.067500000000049,
+      "recentMs": 6.300000000017462,
+      "worstMs": 6.899999999994179,
+      "activeLoops": 0,
+      "subscribers": 3,
+      "frames": 6776
+    }
+  },
+  "minimizedAfter": {
+    "time": 18.025599999994196,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": true
+    },
+    "diagnostics": {
+      "fps": 164.81252575195583,
+      "averageMs": 6.067500000000049,
+      "recentMs": 6.300000000017462,
+      "worstMs": 6.899999999994179,
+      "activeLoops": 0,
+      "subscribers": 3,
+      "frames": 6776
+    }
+  },
+  "restored": {
+    "time": 37.94354799999726,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": false
+    },
+    "diagnostics": {
+      "fps": 164.90311941733967,
+      "averageMs": 6.064166666666764,
+      "recentMs": 6.2000000000116415,
+      "worstMs": 6.399999999994179,
+      "activeLoops": 1,
+      "subscribers": 3,
+      "frames": 10062
+    }
+  }
+}

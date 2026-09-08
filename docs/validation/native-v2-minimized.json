@@ -1,0 +1,34 @@
+{
+  "minA": {
+    "url": "http://127.0.0.1:1420/",
+    "native": true,
+    "time": 0,
+    "fps": 166.66666666666666,
+    "averageMs": 6,
+    "recentMs": 6,
+    "worstMs": 6,
+    "activeLoops": 0,
+    "subscribers": 5,
+    "frames": 3,
+    "state": {
+      "playing": false,
+      "rate": 1,
+      "suspended": true
+    }
+  },
+  "minB": {
+    "time": 0,
+    "fps": 166.66666666666666,
+    "averageMs": 6,
+    "recentMs": 6,
+    "worstMs": 6,
+    "activeLoops": 0,
+    "subscribers": 5,
+    "frames": 3,
+    "state": {
+      "playing": false,
+      "rate": 1,
+      "suspended": true
+    }
+  }
+}

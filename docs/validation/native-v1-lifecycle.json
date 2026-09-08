@@ -1,0 +1,57 @@
+{
+  "preMin": {
+    "time": 0.01320000000298023,
+    "fps": 164.880461665292,
+    "averageMs": 6.065000000000024,
+    "recentMs": 6.100000000005821,
+    "worstMs": 6.899999999994179,
+    "activeLoops": 1,
+    "subscribers": 4,
+    "frames": 4015
+  },
+  "minimizedA": {
+    "time": 6.111500000000018,
+    "fps": 164.88046166529531,
+    "averageMs": 6.064999999999903,
+    "recentMs": 6,
+    "worstMs": 6.5,
+    "activeLoops": 0,
+    "subscribers": 4,
+    "frames": 5020,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": true
+    }
+  },
+  "minimizedB": {
+    "time": 6.111500000000018,
+    "fps": 164.88046166529531,
+    "averageMs": 6.064999999999903,
+    "recentMs": 6,
+    "worstMs": 6.5,
+    "activeLoops": 0,
+    "subscribers": 4,
+    "frames": 5020,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": true
+    }
+  },
+  "restored": {
+    "time": 15.873799999996889,
+    "fps": 164.83516483516485,
+    "averageMs": 6.066666666666666,
+    "recentMs": 6,
+    "worstMs": 6.69999999999709,
+    "activeLoops": 1,
+    "subscribers": 4,
+    "frames": 6630,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": false
+    }
+  }
+}

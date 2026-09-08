@@ -1,0 +1,24 @@
+{
+  "release": "Pedagogy / Course Flow R1",
+  "version": "0.4.0",
+  "lessonCount": 13,
+  "chapters": 9,
+  "progressKey": "modal-dynamics-lab:pedagogy:v1",
+  "validation": {
+    "unit": "85 passed",
+    "ui": "100 passed",
+    "typecheck": "passed",
+    "viteBuild": "passed",
+    "tauriBuild": "passed",
+    "packagedLaunchSmoke": "passed; alive after 4 seconds",
+    "performance": "60.0 FPS; 16.67 ms average; 16.8 ms worst; zero React commits; one active loop; zero loops after 1000 cycles"
+  },
+  "artifacts": [
+    "artifacts/modal-dynamics-lab.exe",
+    "artifacts/Modal Dynamics Lab_0.4.0_x64-setup.exe"
+  ],
+  "physicsChanged": false,
+  "animationChanged": false
+}
+
+

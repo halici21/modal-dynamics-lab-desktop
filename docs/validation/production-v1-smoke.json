@@ -1,0 +1,27 @@
+{
+  "maximized": {
+    "width": 1920,
+    "height": 1009,
+    "overflow": false
+  },
+  "xBefore": "0.09974091195483822",
+  "xAfter": "-0.09007047280741257",
+  "motionChanged": true,
+  "online": false,
+  "url": "http://tauri.localhost/",
+  "native": true,
+  "devClock": "undefined",
+  "energy": "0.5000",
+  "math": true,
+  "resources": [
+    "http://tauri.localhost/assets/index-CN19gAVP.js",
+    "http://tauri.localhost/assets/index-p3-2dOJe.css",
+    "bundled data font",
+    "http://tauri.localhost/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+    "http://tauri.localhost/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+    "http://tauri.localhost/favicon.ico",
+    "http://ipc.localhost/plugin%3Aevent%7Clisten",
+    "http://ipc.localhost/plugin%3Aevent%7Clisten",
+    "http://ipc.localhost/plugin%3Awindow%7Cis_focused"
+  ]
+}

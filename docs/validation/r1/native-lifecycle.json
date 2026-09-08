@@ -1,0 +1,88 @@
+{
+  "before": {
+    "time": 0.7168999999940419,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": false
+    },
+    "diag": {
+      "fps": 164.8804616652916,
+      "averageMs": 6.0650000000000395,
+      "recentMs": 6,
+      "worstMs": 6.2000000000116415,
+      "activeLoops": 1,
+      "subscribers": 4,
+      "frames": 2129
+    }
+  },
+  "minimizedStart": {
+    "time": 0.8827000000178801,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": true
+    },
+    "diag": {
+      "fps": 164.85781013875336,
+      "averageMs": 6.065833333333406,
+      "recentMs": 5.600000000005821,
+      "worstMs": 6.5,
+      "activeLoops": 0,
+      "subscribers": 4,
+      "frames": 2156
+    },
+    "visibility": "visible"
+  },
+  "minimizedEnd": {
+    "time": 0.8827000000178801,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": true
+    },
+    "diag": {
+      "fps": 164.85781013875336,
+      "averageMs": 6.065833333333406,
+      "recentMs": 5.600000000005821,
+      "worstMs": 6.5,
+      "activeLoops": 0,
+      "subscribers": 4,
+      "frames": 2156
+    }
+  },
+  "restoredStart": {
+    "time": 1.1302000000178798,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": false
+    },
+    "diag": {
+      "fps": 164.83516483516485,
+      "averageMs": 6.066666666666666,
+      "recentMs": 6.19999999999709,
+      "worstMs": 6.69999999999709,
+      "activeLoops": 1,
+      "subscribers": 4,
+      "frames": 2198
+    }
+  },
+  "restoredEnd": {
+    "time": 1.9429000000178773,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": false
+    },
+    "diag": {
+      "fps": 164.880461665292,
+      "averageMs": 6.065000000000024,
+      "recentMs": 6.100000000005821,
+      "worstMs": 6.2000000000116415,
+      "activeLoops": 1,
+      "subscribers": 4,
+      "frames": 2332
+    }
+  }
+}

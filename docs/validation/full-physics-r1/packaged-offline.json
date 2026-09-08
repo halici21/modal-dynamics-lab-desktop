@@ -1,0 +1,86 @@
+{
+  "date": "2026-09-06T21:36:11.003Z",
+  "origin": "http://tauri.localhost/",
+  "network": "CDP offline true, cache disabled, reload; Vite server stopped",
+  "modules": [
+    {
+      "module": 0,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 1,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 2,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 3,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 4,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 5,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 6,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 7,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 8,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 9,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 10,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 11,
+      "stage": 1,
+      "invalid": false
+    },
+    {
+      "module": 12,
+      "stage": 1,
+      "invalid": false
+    }
+  ],
+  "zeroModeExplanation": "undefined at omega=0 is intentional mathematical text for damping ratio; no undefined value was rendered",
+  "releaseErrors": [],
+  "minSize": {
+    "width": 900,
+    "height": 680,
+    "dpr": 1,
+    "overflow": false
+  },
+  "maxSize": {
+    "width": 1920,
+    "height": 1009,
+    "dpr": 1,
+    "overflow": false
+  }
+}

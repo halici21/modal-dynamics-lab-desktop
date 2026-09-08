@@ -1,0 +1,28 @@
+{
+  "oracle": {
+    "numpy": "2.4.3",
+    "scipy": "1.17.1",
+    "seed": 20419,
+    "solver": "scipy.linalg.eigh (LAPACK); solve; DOP853; quadrature"
+  },
+  "metrics": {
+    "chainEigenRelativeError": 5.2623665509132645e-15,
+    "oracleEigenRelativeError": 6.339051571866133e-14,
+    "eigenResidual": 2.1399412297902343e-16,
+    "massOrthogonality": 1.0096090630185017e-15,
+    "stiffnessOrthogonalityAbsolute": 1.5916157281026244e-12,
+    "stiffnessOrthogonalityRelative": 1.2567131412319573e-15,
+    "directModalFRFAbsolute": 1.0869340427081547e-15,
+    "participationMassSumError": 0,
+    "reconstructionError": 7.632783294297951e-17,
+    "dynamicResidualAbsolute": 5.044079335779789e-14,
+    "energyDerivativeError": 8.672403573051213e-8,
+    "rayleighTargetError": 6.938893903907228e-18,
+    "newmarkFineMaxDisplacementError": 0.000009704480963917267,
+    "spectrumRelativeError": 0.00004835456991569842,
+    "psdVarianceRelativeError": 4.3365311341858614e-13,
+    "feOracleFrequencyRelativeError": 3.727429476185762e-10,
+    "barContinuumRelativeError": 0.0004016434692879489,
+    "beamContinuumRelativeError": 0.000039753777179907246
+  }
+}

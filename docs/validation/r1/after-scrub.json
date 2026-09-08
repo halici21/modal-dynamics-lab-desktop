@@ -1,0 +1,15 @@
+{
+  "samples": 280,
+  "p95Ms": 1.2999999821186066,
+  "maxMs": 2.2999999821186066,
+  "diagnostics": {
+    "fps": 59.88023952095813,
+    "averageMs": 16.69999999999999,
+    "recentMs": 16.69999999999999,
+    "worstMs": 16.69999999999999,
+    "activeLoops": 0,
+    "subscribers": 5,
+    "frames": 3
+  },
+  "method": "input event to SVG mutation, Phase Space lens active; not optical latency"
+}

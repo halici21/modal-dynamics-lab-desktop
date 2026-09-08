@@ -1,0 +1,9 @@
+{
+  "physics/contracts.ts": true,
+  "physics/dampedEquations.ts": true,
+  "physics/dampingControl.ts": true,
+  "physics/sdof.ts": true,
+  "animation/lifecycle.ts": true,
+  "animation/motion.ts": true,
+  "animation/SimulationClock.ts": true
+}

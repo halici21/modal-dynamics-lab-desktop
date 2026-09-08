@@ -1,0 +1,42 @@
+{
+  "url": "http://tauri.localhost/",
+  "viewport": [
+    1440,
+    1000
+  ],
+  "dpr": 1,
+  "time": "000.10",
+  "live": [
+    [
+      "x",
+      "0.0595"
+    ],
+    [
+      "v",
+      "-0.6939"
+    ],
+    [
+      "a",
+      "-3.1741"
+    ],
+    [
+      "force",
+      "-5.9497"
+    ]
+  ],
+  "math": 1,
+  "devClock": "undefined",
+  "overflow": false,
+  "resources": [
+    "http://tauri.localhost/assets/index-CgNRbHGe.js",
+    "http://tauri.localhost/assets/index-uziMuEWT.css",
+    "data: local embedded font",
+    "http://ipc.localhost/plugin%3Aevent%7Clisten",
+    "http://tauri.localhost/favicon.ico",
+    "http://ipc.localhost/plugin%3Aevent%7Clisten",
+    "http://ipc.localhost/plugin%3Awindow%7Cis_focused",
+    "http://tauri.localhost/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+    "http://tauri.localhost/assets/KaTeX_Main-Regular-B22Nviop.woff2"
+  ],
+  "errors": []
+}

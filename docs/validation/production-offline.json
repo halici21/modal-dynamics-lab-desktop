@@ -1,0 +1,18 @@
+{
+  "url": "http://tauri.localhost/",
+  "tauri": true,
+  "online": false,
+  "focused": true,
+  "playback": "Visual playback speed",
+  "debugApi": false,
+  "diagnosticsButton": false,
+  "resources": [
+    "http://tauri.localhost/assets/index-DVEgiUob.js",
+    "http://tauri.localhost/assets/index-CoH6jZEy.css",
+    "http://tauri.localhost/favicon.ico",
+    "http://ipc.localhost/plugin%3Aevent%7Clisten",
+    "http://ipc.localhost/plugin%3Aevent%7Clisten",
+    "http://ipc.localhost/plugin%3Awindow%7Cis_focused"
+  ],
+  "motionChanged": true
+}

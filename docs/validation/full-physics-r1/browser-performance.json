@@ -1,0 +1,36 @@
+{
+  "environment": "Chromium 10DOF interactive workbench",
+  "date": "2026-09-06T21:13:04.373Z",
+  "diagnostics": {
+    "fps": 60.003000150007495,
+    "averageMs": 16.665833333333335,
+    "recentMs": 16.700000000000273,
+    "worstMs": 16.800000000000182,
+    "activeLoops": 1,
+    "subscribers": 3,
+    "frames": 199
+  },
+  "state": {
+    "playing": true,
+    "rate": 1,
+    "suspended": false
+  },
+  "reactCommits": 0,
+  "solveMs": 0.9000000059604645,
+  "latency": {
+    "method": "Enter keydown to SVG mutation; no optical presentation claim",
+    "samples": 30,
+    "p50": 13.199999988079071,
+    "p95": 29,
+    "max": 31.69999998807907
+  },
+  "cycles": {
+    "fps": 60.00300015000751,
+    "averageMs": 16.66583333333333,
+    "recentMs": 16.699999999999818,
+    "worstMs": 16.800000000000182,
+    "activeLoops": 0,
+    "subscribers": 3,
+    "frames": 201
+  }
+}

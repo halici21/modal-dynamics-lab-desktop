@@ -1,0 +1,41 @@
+{
+  "environment": "Tauri WebView2 development",
+  "normal": {
+    "fps": 165.15276630883434,
+    "averageMs": 6.055000000000049,
+    "recentMs": 6,
+    "worstMs": 6.19999999999709,
+    "activeLoops": 1,
+    "subscribers": 3,
+    "frames": 3830,
+    "commits": 34,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": false
+    },
+    "reactCommitsDuringPlayback": 0
+  },
+  "latency": {
+    "nextFrameP95Ms": 6.700000002980232,
+    "nextFrameMaxMs": 8.799999997019768,
+    "method": "input event to SVG mutation, plus next rendering opportunity (not physical display presentation)",
+    "samples": 300,
+    "medianMs": 0.20000000298023224,
+    "p95Ms": 0.30000001192092896,
+    "maxMs": 0.699999988079071
+  },
+  "after1000Cycles": {
+    "fps": 164.880461665292,
+    "averageMs": 6.065000000000024,
+    "recentMs": 6.100000000005821,
+    "worstMs": 6.19999999999709,
+    "activeLoops": 0,
+    "subscribers": 3,
+    "frames": 4134
+  },
+  "baseline": {
+    "commits": 34,
+    "subscribers": 3
+  }
+}

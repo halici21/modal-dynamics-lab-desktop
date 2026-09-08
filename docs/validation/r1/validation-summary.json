@@ -1,0 +1,45 @@
+{
+  "date": "2026-09-06",
+  "version": "0.2.1",
+  "verdict": "PASS WITH NOTES",
+  "unit": {
+    "command": "npm test",
+    "passed": 39,
+    "files": 5
+  },
+  "ui": {
+    "command": "npm run test:ui",
+    "passed": 68,
+    "interaction": 33,
+    "visual": 35
+  },
+  "build": [
+    "npm run build",
+    "npm run desktop:dev",
+    "npm run desktop:build"
+  ],
+  "engineSha256Matches": 7,
+  "native": {
+    "minimum": [
+      900,
+      680
+    ],
+    "default": [
+      1440,
+      900
+    ],
+    "maximized": [
+      1920,
+      1009
+    ],
+    "playingMinimizeRestore": true,
+    "installerExit": 0,
+    "offlinePackaged": true
+  },
+  "limitations": [
+    "Physical multi-monitor/DPI transitions not tested",
+    "No clean Windows VM or hardware touch/screen-reader speech tests",
+    "No long-duration memory soak",
+    "Nonmodal inspector overlaps workspace until closed"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "environment": "Chromium development harness",
+  "normal": {
+    "fps": 60.00300015000751,
+    "averageMs": 16.66583333333333,
+    "recentMs": 16.599999999998545,
+    "worstMs": 16.80000000000109,
+    "activeLoops": 1,
+    "subscribers": 4,
+    "frames": 603,
+    "commits": 8,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": false
+    },
+    "reactCommitsDuringPlayback": 0
+  },
+  "latency": {
+    "nextFrameP95Ms": 17.5,
+    "nextFrameMaxMs": 18.599999994039536,
+    "method": "input event to SVG mutation, plus next rendering opportunity (not physical display presentation)",
+    "samples": 298,
+    "medianMs": 0.4000000059604645,
+    "p95Ms": 0.699999988079071,
+    "maxMs": 1.5999999940395355
+  },
+  "after1000Cycles": {
+    "fps": 60.00600060005997,
+    "averageMs": 16.66500000000001,
+    "recentMs": 16.600000000000364,
+    "worstMs": 16.80000000000109,
+    "activeLoops": 0,
+    "subscribers": 4,
+    "frames": 903
+  },
+  "baseline": {
+    "commits": 8,
+    "subscribers": 4
+  }
+}

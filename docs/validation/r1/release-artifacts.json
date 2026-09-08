@@ -1,0 +1,14 @@
+{
+  "modal-dynamics-lab.exe": {
+    "bytes": 10145792,
+    "sha256": "541d144400c72c54a0bde00a128cc4a5902c36da74a553cc136eda1fa1d1b6fc"
+  },
+  "Modal Dynamics Lab_0.2.1_x64-setup.exe": {
+    "bytes": 265560136,
+    "sha256": "6ae897c22c926dd7dbb53edcb3e294ff923b22b2c9e110513dee6398541288d4"
+  },
+  "R1_THIRD_PARTY_NOTICES.txt": {
+    "bytes": 1293,
+    "sha256": "0e2808501d13f64d1ef7250346c0fcfb9565eb1e7b70c6622ea6f5d4194267fb"
+  }
+}

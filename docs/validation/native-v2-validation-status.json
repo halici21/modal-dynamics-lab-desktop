@@ -1,0 +1,20 @@
+{
+  "accepted": false,
+  "reason": "Controlled native focus and playback did not remain valid; production performance assertions/timeouts rejected the runs.",
+  "desktopBuild": "passed",
+  "offlineCalculations": "passed",
+  "minimum": {
+    "width": 901,
+    "height": 680,
+    "stageWidth": 660,
+    "playbackBottom": 631,
+    "overflow": false
+  },
+  "maximized": {
+    "width": 1920,
+    "height": 1009,
+    "overflow": false
+  },
+  "nativePerformance": "unverified",
+  "playingMinimizeRestore": "unverified"
+}

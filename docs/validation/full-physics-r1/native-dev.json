@@ -1,0 +1,77 @@
+{
+  "date": "2026-09-06T21:29:28.850Z",
+  "nativePerf": {
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": false
+    },
+    "diagnostics": {
+      "fps": 164.85781013876323,
+      "averageMs": 6.0658333333330425,
+      "recentMs": 6.099999999976717,
+      "worstMs": 6.2000000000116415,
+      "activeLoops": 1,
+      "subscribers": 3,
+      "frames": 496
+    },
+    "timeAdvanced": 3.0025000000000017,
+    "commitsBefore": 25,
+    "commitsAfter": 25,
+    "viewport": [
+      1440,
+      900,
+      1
+    ]
+  },
+  "nativeMin": {
+    "a": {
+      "t": 14.374899999976519,
+      "d": {
+        "fps": 164.88046166529531,
+        "averageMs": 6.064999999999903,
+        "recentMs": 6.099999999976717,
+        "worstMs": 6.2999999999883585,
+        "activeLoops": 0,
+        "subscribers": 3,
+        "frames": 2370
+      }
+    },
+    "b": {
+      "t": 14.374899999976519,
+      "d": {
+        "fps": 164.88046166529531,
+        "averageMs": 6.064999999999903,
+        "recentMs": 6.099999999976717,
+        "worstMs": 6.2999999999883585,
+        "activeLoops": 0,
+        "subscribers": 3,
+        "frames": 2370
+      }
+    },
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": true
+    }
+  },
+  "nativeRestore": {
+    "start": 28.331099999946016,
+    "end": 29.337999999945925,
+    "state": {
+      "playing": true,
+      "rate": 1,
+      "suspended": false
+    },
+    "diagnostics": {
+      "fps": 164.88046166529531,
+      "averageMs": 6.064999999999903,
+      "recentMs": 6.099999999976717,
+      "worstMs": 7,
+      "activeLoops": 1,
+      "subscribers": 3,
+      "frames": 4837
+    }
+  },
+  "notes": "Actual Tauri debug WebView2, native 165 Hz display, DPR 1. No forced clock suspension override. Minimized sample shows identical time and frame count."
+}
