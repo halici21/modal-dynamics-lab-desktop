@@ -570,7 +570,7 @@ textarea {
 /* Anchored to the projected body position, offset above it. */
 .viewport-label {
   position: absolute;
-  transform: translate(-50%, -220%);
+  transform: translate(-50%, calc(-100% - 8px));
   padding: 1px 4px;
   border-radius: var(--radius-sm);
   background: color-mix(in oklab, var(--surface-stage) 78%, transparent);

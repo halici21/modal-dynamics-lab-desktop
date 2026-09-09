@@ -694,10 +694,21 @@ export function createCadScene(
       }
       return null;
     },
+    /**
+     * Projects the TOP of each body, not its centre, so a DOM label sits above
+     * the geometry it names instead of on top of it — and stays correct when
+     * bodies of different sizes share a scene.
+     */
     projectBodies() {
       const v = new THREE.Vector3();
+      const box = new THREE.Box3();
       return massMeshes.map((mesh, i) => {
-        v.setFromMatrixPosition(mesh.matrixWorld).project(camera);
+        box.setFromObject(mesh);
+        v.set(
+          (box.min.x + box.max.x) / 2,
+          box.max.y,
+          (box.min.z + box.max.z) / 2,
+        ).project(camera);
         return {
           key: (mesh.userData.selection as string) ?? "mass:" + i,
           x: (v.x + 1) / 2,
