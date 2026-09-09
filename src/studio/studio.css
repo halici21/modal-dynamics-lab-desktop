@@ -508,17 +508,34 @@ textarea {
   max-width: 60%;
 }
 .view-cube {
-  width: 22px;
-  height: 22px;
-  margin-inline-end: 4px;
+  width: 26px;
+  height: 26px;
+  margin-inline-end: 6px;
   border: 1px solid var(--border-strong);
   border-radius: 2px;
   position: relative;
   background: var(--surface-raised);
+  /* Two hairlines suggest the receding faces of a cube without a 3D mesh. */
+  background-image: linear-gradient(
+      to bottom right,
+      transparent calc(50% - 0.5px),
+      var(--border) calc(50% - 0.5px),
+      var(--border) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    ),
+    linear-gradient(
+      to bottom left,
+      transparent calc(50% - 0.5px),
+      var(--border) calc(50% - 0.5px),
+      var(--border) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    );
+  flex-shrink: 0;
 }
 .view-cube span {
   position: absolute;
-  inset: 4px;
+  inset: 5px;
+  background: color-mix(in oklab, var(--accent) 30%, transparent);
   border: 1px solid var(--accent);
   border-radius: 1px;
   transition: transform var(--motion-interface) var(--ease-interface);
@@ -544,17 +561,30 @@ textarea {
 
 .viewport-labels {
   position: absolute;
-  inset-block-end: 52px;
-  inset-inline-start: var(--space-3);
-  display: flex;
-  gap: var(--space-3);
+  inset: 0;
   pointer-events: none;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--text-muted);
 }
+/* Anchored to the projected body position, offset above it. */
+.viewport-label {
+  position: absolute;
+  transform: translate(-50%, -220%);
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in oklab, var(--surface-stage) 78%, transparent);
+  white-space: nowrap;
+}
 .viewport-scale {
+  position: absolute;
+  inset-block-start: var(--space-2);
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
   color: var(--warning);
+  background: color-mix(in oklab, var(--surface-stage) 82%, transparent);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
 }
 .viewport-caption {
   position: absolute;

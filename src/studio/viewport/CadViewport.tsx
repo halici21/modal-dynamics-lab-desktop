@@ -68,6 +68,7 @@ export function CadViewport({
   caption: string;
 }) {
   const mount = useRef<HTMLDivElement>(null);
+  const labelLayer = useRef<HTMLDivElement>(null);
   const handle = useRef<SceneHandle | null>(null);
   const [mode, setMode] = useState<"pending" | "webgl" | "svg">(
     forceSvg ? "svg" : "pending",
@@ -149,6 +150,20 @@ export function CadViewport({
       if (!scene) return;
       scene.update(frameFor(t));
       scene.render();
+      // Critical labels stay in the DOM (never 3D text) but must follow the
+      // geometry they name. Positions are written straight to style here, in
+      // the same frame, so React is not involved.
+      const layer = labelLayer.current;
+      if (!layer) return;
+      const projected = scene.projectBodies();
+      for (const p of projected) {
+        const el = layer.querySelector<HTMLElement>(`[data-anchor="${p.key}"]`);
+        if (!el) continue;
+        const inside = p.x >= 0 && p.x <= 1 && p.y >= 0 && p.y <= 1;
+        el.style.visibility = inside ? "visible" : "hidden";
+        el.style.left = (p.x * 100).toFixed(3) + "%";
+        el.style.top = (p.y * 100).toFixed(3) + "%";
+      }
     });
   }, [clock, frameFor, mode]);
 
@@ -201,7 +216,9 @@ export function CadViewport({
       </div>
 
       <div className="viewport-overlay">{overlay}</div>
-      <div className="viewport-labels">{labels}</div>
+      <div className="viewport-labels" ref={labelLayer}>
+        {labels}
+      </div>
 
       <div className="viewport-views" role="group" aria-label="View orientation">
         <div className="view-cube" aria-hidden="true" data-view={view}>

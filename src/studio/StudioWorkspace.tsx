@@ -51,6 +51,7 @@ import {
   activeTokens,
   selectionForToken,
   selectionKey,
+  token,
   type LinkRef,
   type StudioSelection,
 } from "./selection";
@@ -889,10 +890,18 @@ export function StudioWorkspace({
   /* ---------------- viewport overlays ---------------- */
   const viewportLabels = (
     <>
-      {study.stage === "chain" &&
+      {(study.stage === "chain" || study.stage === "sdof") &&
         viewportModel.kind === "chain" &&
         viewportModel.labels.map((l, i) => (
-          <span key={i} className="viewport-label" data-token={`mass:m${i + 1}`}>
+          <span
+            key={i}
+            className={
+              "viewport-label" + (active.has(token.mass(i)) ? " linked" : "")
+            }
+            data-anchor={`mass:${i}`}
+            data-token={token.mass(i)}
+            data-linked={active.has(token.mass(i)) || undefined}
+          >
             {l}
           </span>
         ))}

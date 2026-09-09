@@ -79,6 +79,8 @@ export interface SceneHandle {
   /** Advance the camera tween. Returns true while more frames are needed. */
   tickCamera(nowMs: number): boolean;
   pick(clientX: number, clientY: number): string | null;
+  /** Normalised [0,1] screen positions of each pickable body, for DOM labels. */
+  projectBodies(): { key: string; x: number; y: number }[];
   setTheme(dark: boolean): void;
   stats(): {
     calls: number;
@@ -193,11 +195,22 @@ export function createCadScene(
   scene.add(ambient, key, fill);
 
   /* --- restrained engineering grid + axis triad ------------------------ */
-  const grid = new THREE.GridHelper(24, 24, palette.gridStrong, palette.grid);
-  (grid.material as ThreeNS.Material & { opacity: number; transparent: boolean }).opacity = 0.55;
+  const grid = new THREE.GridHelper(20, 20, palette.gridStrong, palette.grid);
+  (grid.material as ThreeNS.Material & { opacity: number; transparent: boolean }).opacity = 0.85;
   (grid.material as ThreeNS.Material).transparent = true;
-  grid.position.y = -1.9;
+  grid.position.y = -1.62;
   scene.add(grid);
+
+  /* A ground grid is edge-on in the front view, which is where this app spends
+     most of its time. A second grid in the view plane, set well behind the
+     model, gives the front/back/left/right views a readable engineering scale
+     without turning into an infinite neon backdrop. */
+  const backdrop = new THREE.GridHelper(20, 20, palette.grid, palette.grid);
+  backdrop.rotation.x = Math.PI / 2;
+  backdrop.position.z = -2.6;
+  (backdrop.material as ThreeNS.Material & { opacity: number; transparent: boolean }).opacity = 0.5;
+  (backdrop.material as ThreeNS.Material).transparent = true;
+  scene.add(backdrop);
 
   const axes = new THREE.Group();
   const axisColors = [0x9fb0bf, 0x8fae9c, 0x9aa4c4];
@@ -212,7 +225,7 @@ export function createCadScene(
     );
     axes.add(line);
   });
-  axes.position.set(-5.2, -1.75, 0);
+  axes.position.set(-4.9, -1.6, 0.6);
   scene.add(axes);
 
   /* --- model group ------------------------------------------------------ */
@@ -302,6 +315,9 @@ export function createCadScene(
       color: palette.body,
       roughness: 0.52,
       metalness: 0.22,
+      polygonOffset: true,
+      polygonOffsetFactor: 1,
+      polygonOffsetUnits: 1,
     });
     model.positions.forEach((px, i) => {
       const s = model.sizes[i];
@@ -313,6 +329,7 @@ export function createCadScene(
         new THREE.EdgesGeometry(geometry),
         new THREE.LineBasicMaterial({ color: palette.edge }),
       );
+      edges.renderOrder = 1;
       mesh.add(edges);
       modelGroup.add(mesh);
       massMeshes.push(mesh);
@@ -361,10 +378,10 @@ export function createCadScene(
     });
     anchorXs.forEach((x) => {
       const wall = new THREE.Mesh(
-        new THREE.BoxGeometry(0.12, 2.6, 1.6),
+        new THREE.BoxGeometry(0.14, 1.9, 1.5),
         new THREE.MeshStandardMaterial({ color: palette.ghost, roughness: 0.85 }),
       );
-      wall.position.set(x, 0, 0);
+      wall.position.set(x, -0.32, 0);
       wall.userData.selection = `ground:${x < 0 ? 0 : 1}`;
       modelGroup.add(wall);
       pickable.push(wall);
@@ -620,10 +637,19 @@ export function createCadScene(
       camera.lookAt(target);
       if (t >= 1) {
         tweening = false;
+        handle.fit();
         return false;
       }
       return true;
     },
+    /**
+     * Frames the model for the CURRENT view direction. An orthographic frustum
+     * has to satisfy both axes independently: half-height must cover the
+     * projected vertical extent, and half-height * aspect must cover the
+     * projected horizontal extent. Taking the max of the two (rather than a
+     * single "size" scalar) is what stops a wide chain being framed as if it
+     * were square, which left most of the viewport empty.
+     */
     fit() {
       const box = new THREE.Box3().setFromObject(modelGroup);
       if (box.isEmpty()) return;
@@ -631,9 +657,27 @@ export function createCadScene(
       box.getCenter(target);
       const w = Math.max(1, mount.clientWidth);
       const h = Math.max(1, mount.clientHeight);
-      const needed = Math.max(size.y, (size.x * h) / w, size.z) / 2;
-      zoom = Math.max(0.25, Math.min(4, (FRUSTUM * 0.82) / Math.max(0.6, needed)));
-      radius = Math.max(10, size.length() * 1.8);
+      const aspect = w / h;
+      const axis = Math.abs(currentDir.x) > 0.9
+        ? "x"
+        : Math.abs(currentDir.y) > 0.9
+          ? "y"
+          : Math.abs(currentDir.z) > 0.9
+            ? "z"
+            : null;
+      // Projected extents for the axis-aligned named views; the bounding
+      // sphere is the honest fallback for isometric and intermediate angles.
+      const projected =
+        axis === "z"
+          ? [size.x, size.y]
+          : axis === "x"
+            ? [size.z, size.y]
+            : axis === "y"
+              ? [size.x, size.z]
+              : [size.length() * 0.72, size.length() * 0.72];
+      const needed = Math.max(projected[1] / 2, projected[0] / (2 * aspect));
+      zoom = Math.max(0.2, Math.min(6, FRUSTUM / (1.1 * Math.max(0.25, needed))));
+      radius = Math.max(12, size.length() * 2.2);
       camera.position.copy(currentDir).multiplyScalar(radius).add(target);
       camera.lookAt(target);
       frustum();
@@ -649,6 +693,17 @@ export function createCadScene(
         if (key) return key;
       }
       return null;
+    },
+    projectBodies() {
+      const v = new THREE.Vector3();
+      return massMeshes.map((mesh, i) => {
+        v.setFromMatrixPosition(mesh.matrixWorld).project(camera);
+        return {
+          key: (mesh.userData.selection as string) ?? "mass:" + i,
+          x: (v.x + 1) / 2,
+          y: (1 - v.y) / 2,
+        };
+      });
     },
     setTheme(dark) {
       palette = dark ? DARK : LIGHT;
@@ -673,9 +728,11 @@ export function createCadScene(
     },
     dispose() {
       clearModel();
-      scene.remove(modelGroup, grid, axes, ambient, key, fill);
+      scene.remove(modelGroup, grid, backdrop, axes, ambient, key, fill);
       grid.geometry.dispose();
       (grid.material as ThreeNS.Material).dispose();
+      backdrop.geometry.dispose();
+      (backdrop.material as ThreeNS.Material).dispose();
       axes.children.forEach((c) => {
         const line = c as ThreeNS.Line;
         line.geometry.dispose();
