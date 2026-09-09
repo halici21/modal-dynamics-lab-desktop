@@ -1122,3 +1122,116 @@ textarea {
     transition: none;
   }
 }
+
+/* ---------- guided lesson (PEDAGOGY R1 component, preserved) ----------
+   The panel itself is unchanged; only its surface styling is re-homed here
+   after app/styles.css was retired. Its all-caps step labels are pedagogy
+   copy and are left for the Pedagogy release to revise; the tracked-out
+   letter-spacing they carried is dropped. */
+.learning-surface {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2) 0 var(--space-3);
+  margin-block-end: var(--space-3);
+  border-block-end: 1px solid var(--border);
+  max-width: 96ch;
+}
+.learning-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.learning-mode-switch {
+  display: flex;
+  gap: 1px;
+}
+.studio .learning-mode-switch button.active {
+  background: var(--selected);
+  border-color: var(--border-strong);
+}
+.learning-status {
+  display: flex;
+  gap: var(--space-3);
+  align-items: baseline;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+.learning-state {
+  color: var(--text-faint);
+}
+.learning-compact {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.learning-compact > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 70ch;
+}
+.learning-compact strong {
+  font-weight: 600;
+}
+.learning-compact span {
+  color: var(--text-muted);
+  text-wrap: pretty;
+}
+.learning-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+.studio .learning-surface .quiet {
+  background: none;
+  border-color: transparent;
+  color: var(--text-muted);
+}
+.learning-surface .eyebrow {
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+  letter-spacing: 0;
+}
+.lesson-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 78ch;
+}
+.lesson-meta {
+  display: flex;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+}
+.lesson-card h2 {
+  margin: 0;
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+.lesson-question {
+  margin: 0;
+  color: var(--text-muted);
+  text-wrap: pretty;
+}
+.prediction-options,
+.lesson-experiment,
+.lesson-equation,
+.lesson-check,
+.lesson-next,
+.lesson-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  color: var(--text-muted);
+}
+.lesson-equation code {
+  font-family: var(--font-mono);
+  color: var(--text);
+}

@@ -56,6 +56,9 @@ import {
   type StudioSelection,
 } from "./selection";
 import { StudioShell, type ShellPanes } from "./StudioShell";
+import { LearningPanel } from "../education/LearningPanel";
+import { lessonForModule, type LessonPreset } from "../education/curriculum";
+import { usePedagogyProgress } from "../education/progress";
 import { CadViewport } from "./viewport/CadViewport";
 import type { FrameData, ViewportModel } from "./viewport/scene";
 import {
@@ -171,6 +174,28 @@ export function StudioWorkspace({
     "Frequency order; no parameter change yet.",
   );
   const [settingsError, setSettingsError] = useState("");
+
+  /* Pedagogy R1's guided lesson is preserved, not restarted: Learn density
+     shows the existing LearningPanel above the derivation. LessonMode and
+     Density are the same three names by design (`mdl-pedagogy`). */
+  const lesson = lessonForModule(module);
+  const pedagogy = usePedagogyProgress(module);
+  const applyPreset = useCallback(
+    (preset: LessonPreset) => {
+      clock.pause();
+      clock.setTime(0);
+      if (preset.kind === "sdof")
+        setSdof({
+          mass: preset.mass,
+          stiffness: preset.stiffness,
+          damping: preset.damping ?? 0,
+          x0: preset.x0 ?? 0.1,
+          v0: preset.v0 ?? 0,
+        });
+      else onModule(preset.module);
+    },
+    [clock, onModule],
+  );
   const previousModal = useRef<Modal | null>(null);
 
   /* Study switch resets the study-scoped state but keeps density and panes. */
@@ -726,7 +751,26 @@ export function StudioWorkspace({
     switch (currentTab) {
       case "Equations":
         return (
-          <EquationsTab
+          <>
+            {density === "learn" && (
+              <LearningPanel
+                lesson={lesson}
+                mode={density}
+                progress={pedagogy.progress}
+                firstRun={pedagogy.progress.started.length === 0}
+                onMode={onDensity}
+                onStart={() => pedagogy.start(lesson.id, "learn")}
+                onPractice={() => pedagogy.practice(lesson.id)}
+                onComplete={() => pedagogy.complete(lesson.id)}
+                onSkip={() => onDensity("explore")}
+                onRestart={() => pedagogy.start(lesson.id, "learn")}
+                onExplore={() => onDensity("explore")}
+                onExperiment={applyPreset}
+                onModule={onModule}
+                onLens={() => setTab("Response")}
+              />
+            )}
+            <EquationsTab
             steps={steps}
             step={step}
             onStep={setStep}
@@ -735,8 +779,9 @@ export function StudioWorkspace({
             active={mergedActive}
             onSelect={select}
             reduced={reduced}
-            fallback={null}
-          />
+              fallback={null}
+            />
+          </>
         );
       case "Modes":
         return modal && system ? (
