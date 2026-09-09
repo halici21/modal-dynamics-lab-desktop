@@ -327,27 +327,39 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 1px;
+  border-radius: var(--radius-sm);
+}
+.browser-group:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
 }
 .browser-group-head {
-  font-size: var(--text-xs);
-  color: var(--text-faint);
-  margin: 0 0 2px;
-  padding: 2px 4px;
-}
-.browser button.browser-group-head {
-  background: none;
-  border: 0;
-  text-align: start;
   display: flex;
   gap: 4px;
   align-items: center;
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+  padding: 3px 4px;
   min-height: 22px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+.browser-group-head:hover {
+  background: var(--surface-raised);
+  color: var(--text-muted);
+}
+.browser-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
 .browser-caret {
   display: inline-block;
   width: 9px;
+  text-align: center;
 }
 .browser-item {
+  cursor: pointer;
   display: grid;
   grid-template-columns: 46px minmax(0, auto) minmax(0, 1fr);
   align-items: baseline;
@@ -362,6 +374,10 @@ textarea {
 }
 .browser-item:hover {
   background: var(--surface-raised);
+}
+.browser-item:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -1px;
 }
 .browser-item.selected {
   background: var(--selected);

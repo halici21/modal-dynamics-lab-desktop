@@ -58,7 +58,11 @@ export function Equation({
 }) {
   const label = line.segments.map((s) => s.text ?? "").filter(Boolean).join(" ");
   return (
-    <div className="equation-line" role="math" aria-label={label || undefined}>
+    <div
+      className="equation-line"
+      role="group"
+      aria-label={label || undefined}
+    >
       {line.segments.map((segment, i) => {
         const tokens = segment.tokens ?? [];
         const lit = tokens.some((t) => active.has(t));
