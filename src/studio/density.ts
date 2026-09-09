@@ -59,7 +59,7 @@ export function rulesFor(density: Density): DensityRules {
         allParameters: true,
         matrices: true,
         derivationFirst: false,
-        dockHeight: 156,
+        dockHeight: 148,
       };
     case "inspect":
       return {

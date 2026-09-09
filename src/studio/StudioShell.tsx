@@ -14,7 +14,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Group, Panel, Separator, usePanelRef } from "react-resizable-panels";
 import { AnalysisVisibility } from "../components/AnalysisVisibility";
 
-export const DOCK_DEFAULT = 156;
+export const DOCK_DEFAULT = 148;
 export const DOCK_COLLAPSED = 34;
 
 export interface ShellPanes {

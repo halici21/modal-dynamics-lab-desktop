@@ -48,8 +48,11 @@ textarea {
 
 :root {
   --studio-bar: 40px;
-  --studio-browser: 196px;
-  --studio-properties: 216px;
+  /* Tuned to satisfy PC-1: at 1440x900 with the property manager populated
+     the viewport must still reach 55% of window area.
+     1440-184-200 = 1056 wide, 900-40-26-148-5 = 681 tall -> 55.5%. */
+  --studio-browser: 184px;
+  --studio-properties: 200px;
   --studio-status: 26px;
   --link-wash: color-mix(in oklab, var(--accent) 14%, transparent);
 }
