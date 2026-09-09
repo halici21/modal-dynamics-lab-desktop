@@ -393,7 +393,10 @@ export function StudioWorkspace({
         const kind = assembly.perNode === 1 ? "bar" : assembly.perNode === 2 ? "beam" : "frame";
         const per = assembly.perNode;
         const L = Math.max(...nodes.map((p) => Math.hypot(p[0], p[1]))) || 1;
-        const gain = (0.22 * SPAN) / Math.max(1e-6, extent);
+        // Gain works in NODE coordinates, which are later normalised by L and
+        // scaled to SPAN. Using SPAN here too multiplied the deformation by
+        // SPAN twice and threw the mode shape off screen.
+        const gain = (0.22 * L) / Math.max(1e-6, extent);
         const pts: number[] = [];
         assembly.elementData.forEach((e) => {
           const [i, j] = e.nodes;
