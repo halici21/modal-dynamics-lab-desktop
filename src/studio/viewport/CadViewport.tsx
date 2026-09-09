@@ -80,6 +80,23 @@ export function CadViewport({
   const [fallbackReason, setFallbackReason] = useState(
     forceSvg ? "SVG renderer requested" : "",
   );
+  /**
+   * Pointer mapping (documented in docs/CAD_EXPERIENCE_R3_INTERACTIONS.md and
+   * verified against WebView2, not copied from another product):
+   *   left click            select
+   *   left drag             orbit (restrained; poles clamped)
+   *   middle drag / shift   pan
+   *   wheel                 zoom
+   * Middle-drag is the CAD convention but WebView2 turns an unhandled middle
+   * press into autoscroll, so the handler claims the pointer explicitly.
+   */
+  const drag = useRef<{
+    id: number;
+    x: number;
+    y: number;
+    mode: "orbit" | "pan";
+    moved: boolean;
+  } | null>(null);
 
   /* --- create / dispose the WebGL scene -------------------------------- */
   useEffect(() => {
@@ -202,9 +219,54 @@ export function CadViewport({
         className="viewport-canvas"
         data-renderer={mode}
         onPointerDown={(e) => {
-          if (e.button !== 0 || mode !== "webgl") return;
-          const key = handle.current?.pick(e.clientX, e.clientY);
-          if (key) onSelect(key);
+          if (mode !== "webgl") return;
+          if (e.button !== 0 && e.button !== 1) return;
+          e.preventDefault();
+          drag.current = {
+            id: e.pointerId,
+            x: e.clientX,
+            y: e.clientY,
+            mode: e.button === 1 || e.shiftKey ? "pan" : "orbit",
+            moved: false,
+          };
+          e.currentTarget.setPointerCapture(e.pointerId);
+        }}
+        onPointerMove={(e) => {
+          const d = drag.current;
+          const scene = handle.current;
+          if (!d || !scene || d.id !== e.pointerId) return;
+          const dx = e.clientX - d.x;
+          const dy = e.clientY - d.y;
+          if (!d.moved && Math.hypot(dx, dy) < 3) return;
+          d.moved = true;
+          d.x = e.clientX;
+          d.y = e.clientY;
+          if (d.mode === "pan") scene.pan(dx, dy);
+          else scene.orbit(dx * 0.006, dy * 0.006);
+          scene.render();
+        }}
+        onPointerUp={(e) => {
+          const d = drag.current;
+          if (!d || d.id !== e.pointerId) return;
+          drag.current = null;
+          e.currentTarget.releasePointerCapture(e.pointerId);
+          // A press that never moved is a selection, not a camera gesture.
+          if (!d.moved && e.button === 0) {
+            const key = handle.current?.pick(e.clientX, e.clientY);
+            if (key) onSelect(key);
+          }
+        }}
+        onPointerCancel={() => {
+          drag.current = null;
+        }}
+        onLostPointerCapture={() => {
+          drag.current = null;
+        }}
+        onWheel={(e) => {
+          const scene = handle.current;
+          if (!scene || mode !== "webgl") return;
+          scene.zoomBy(e.deltaY < 0 ? 1.12 : 1 / 1.12);
+          scene.render();
         }}
       >
         {mode !== "webgl" && (

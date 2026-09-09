@@ -75,6 +75,12 @@ export interface SceneHandle {
   resize(): void;
   setSelection(key: string | null): void;
   setView(view: ViewName, animate: boolean): void;
+  /** Restrained orbit in radians, relative to the current direction. */
+  orbit(deltaAzimuth: number, deltaPolar: number): void;
+  /** Pan the camera target in screen-space fractions of the frustum. */
+  pan(dx: number, dy: number): void;
+  /** Multiplicative zoom, clamped. */
+  zoomBy(factor: number): void;
   fit(): void;
   /** Advance the camera tween. Returns true while more frames are needed. */
   tickCamera(nowMs: number): boolean;
@@ -650,6 +656,41 @@ export function createCadScene(
      * single "size" scalar) is what stops a wide chain being framed as if it
      * were square, which left most of the viewport empty.
      */
+    /**
+     * Restrained orbit. Polar angle is clamped away from the poles so the
+     * scene never flips through vertical, and the camera stays on the sphere
+     * around the fit target — there is no free-fly camera in this product.
+     */
+    orbit(deltaAzimuth, deltaPolar) {
+      tweening = false;
+      const spherical = new THREE.Spherical().setFromVector3(currentDir);
+      spherical.theta -= deltaAzimuth;
+      spherical.phi = Math.max(
+        0.18,
+        Math.min(Math.PI - 0.18, spherical.phi - deltaPolar),
+      );
+      spherical.radius = 1;
+      currentDir = new THREE.Vector3().setFromSpherical(spherical).normalize();
+      camera.position.copy(currentDir).multiplyScalar(radius).add(target);
+      camera.up.set(0, 1, 0);
+      camera.lookAt(target);
+    },
+    pan(dx, dy) {
+      const half = FRUSTUM / zoom;
+      const w = Math.max(1, mount.clientWidth);
+      const h = Math.max(1, mount.clientHeight);
+      const right = new THREE.Vector3();
+      const up = new THREE.Vector3();
+      camera.matrixWorld.extractBasis(right, up, new THREE.Vector3());
+      target.addScaledVector(right, -dx * ((half * (w / h)) / (w / 2)));
+      target.addScaledVector(up, dy * (half / (h / 2)));
+      camera.position.copy(currentDir).multiplyScalar(radius).add(target);
+      camera.lookAt(target);
+    },
+    zoomBy(factor) {
+      zoom = Math.max(0.2, Math.min(12, zoom * factor));
+      frustum();
+    },
     fit() {
       const box = new THREE.Box3().setFromObject(modelGroup);
       if (box.isEmpty()) return;
