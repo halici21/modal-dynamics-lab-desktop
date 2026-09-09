@@ -994,6 +994,7 @@ export function StudioWorkspace({
           dark={theme === "dark"}
           reduced={reduced}
           forceSvg={forceSvg}
+          defaultView={study.stage === "rigid" ? "iso" : "front"}
           caption={sampler?.label ?? "No supported response for this configuration."}
           labels={viewportLabels}
           overlay={

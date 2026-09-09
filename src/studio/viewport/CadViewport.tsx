@@ -54,6 +54,7 @@ export function CadViewport({
   overlay,
   labels,
   caption,
+  defaultView = "front",
 }: {
   clock: SimulationClock;
   model: ViewportModel;
@@ -66,6 +67,8 @@ export function CadViewport({
   overlay: ReactNode;
   labels: ReactNode;
   caption: string;
+  /** Named view applied when the scene first mounts. */
+  defaultView?: ViewName;
 }) {
   const mount = useRef<HTMLDivElement>(null);
   const labelLayer = useRef<HTMLDivElement>(null);
@@ -73,7 +76,7 @@ export function CadViewport({
   const [mode, setMode] = useState<"pending" | "webgl" | "svg">(
     forceSvg ? "svg" : "pending",
   );
-  const [view, setView] = useState<ViewName>("front");
+  const [view, setView] = useState<ViewName>(defaultView);
   const [fallbackReason, setFallbackReason] = useState(
     forceSvg ? "SVG renderer requested" : "",
   );
@@ -97,6 +100,7 @@ export function CadViewport({
           setMode("svg");
           return;
         }
+        scene.setView(defaultView, false);
         handle.current = scene;
         setMode("webgl");
         Object.assign(window, {
@@ -126,7 +130,7 @@ export function CadViewport({
       if ((window as { __studioViewport?: unknown }).__studioViewport)
         delete (window as { __studioViewport?: unknown }).__studioViewport;
     };
-  }, [forceSvg, dark, reduced, clock]);
+  }, [forceSvg, dark, reduced, clock, defaultView]);
 
   /* --- model rebuild ---------------------------------------------------- */
   useEffect(() => {
@@ -242,7 +246,7 @@ export function CadViewport({
           aria-label="Reset view"
           disabled={mode !== "webgl"}
           onClick={() => {
-            orient("front");
+            orient(defaultView);
             fit();
           }}
         >

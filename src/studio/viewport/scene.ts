@@ -454,7 +454,7 @@ export function createCadScene(
 
   function buildRigid(model: RigidSpec) {
     rigidBody = new THREE.Group();
-    const s = model.span * 0.28;
+    const s = model.span * 0.19;
     const shell = new THREE.Mesh(
       new THREE.BoxGeometry(s * 2.1, s, s * 1.3),
       new THREE.MeshStandardMaterial({

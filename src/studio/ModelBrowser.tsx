@@ -111,7 +111,9 @@ export function ModelBrowser({
                     <span className="browser-kind">{node.kind}</span>
                     <span className="browser-label">{node.label}</span>
                     {node.detail && (
-                      <span className="browser-detail">{node.detail}</span>
+                      <span className="browser-detail" title={node.detail}>
+                        {node.detail}
+                      </span>
                     )}
                   </button>
                 );
