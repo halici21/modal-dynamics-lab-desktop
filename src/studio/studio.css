@@ -655,9 +655,17 @@ textarea {
 .prop-state > div,
 .prop-live > div {
   display: grid;
-  grid-template-columns: 3.5ch minmax(0, 1fr) 4ch;
+  /* The label column sizes to its content: "Extension" and "x" both fit
+     without the value sliding underneath. */
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: var(--space-2);
   align-items: baseline;
+}
+.prop-state output,
+.prop-live output {
+  text-align: end;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .prop-unit {
   font-size: var(--text-xs);
@@ -1121,6 +1129,13 @@ textarea {
   .view-cube span {
     transition: none;
   }
+}
+
+/* The studio bar already owns the Learn/Explore/Inspect control. The lesson
+   panel's own copy of it is redundant chrome showing the same state twice,
+   which panel coordination forbids, so it is hidden rather than desynced. */
+.studio .learning-mode-switch {
+  display: none;
 }
 
 /* ---------- guided lesson (PEDAGOGY R1 component, preserved) ----------
