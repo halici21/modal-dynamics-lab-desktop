@@ -123,6 +123,7 @@ export function CadViewport({
         Object.assign(window, {
           __studioViewport: {
             renderer: "webgl" as const,
+            owner: scene,
             stats: (): ViewportStats => ({ renderer: "webgl", ...scene!.stats() }),
           },
         });
@@ -144,8 +145,8 @@ export function CadViewport({
       handle.current = null;
       clock.cancelJob("studio-camera");
       scene?.dispose();
-      if ((window as { __studioViewport?: unknown }).__studioViewport)
-        delete (window as { __studioViewport?: unknown }).__studioViewport;
+      const w = window as { __studioViewport?: { owner?: unknown } };
+      if (w.__studioViewport?.owner === scene) delete w.__studioViewport;
     };
   }, [forceSvg, dark, reduced, clock, defaultView]);
 

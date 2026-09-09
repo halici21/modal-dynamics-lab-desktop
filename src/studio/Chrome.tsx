@@ -6,7 +6,7 @@
  * visually and verbally distinct: the transport never shows a frequency, and
  * the status line never shows a rate.
  */
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { SimulationClock } from "../animation/SimulationClock";
 import { DENSITIES, type Density } from "./density";
 import { STUDIES, STUDY_GROUPS, type Study } from "./model";
@@ -21,14 +21,21 @@ export function Transport({
   onReset(): void;
 }) {
   const [state, setState] = useState(() => clock.getState());
-  const [time, setTime] = useState(() => clock.read());
+  const time = useRef<HTMLOutputElement>(null);
   useEffect(() => clock.subscribeState(() => setState({ ...clock.getState() })), [clock]);
-  useEffect(() => {
-    // Time is sampled on a cheap interval rather than every frame so playback
-    // never commits React. 4 Hz is enough to read a clock.
-    const id = window.setInterval(() => setTime(clock.read()), 250);
-    return () => window.clearInterval(id);
-  }, [clock]);
+  /**
+   * The clock readout is written straight to the DOM from the frame
+   * subscription. An earlier draft polled clock.read() into React state at
+   * 4 Hz, which was still four React commits per second of steady playback —
+   * exactly the frame-by-frame commit the performance gate forbids.
+   */
+  useLayoutEffect(
+    () =>
+      clock.subscribe((t) => {
+        if (time.current) time.current.value = t.toFixed(2);
+      }),
+    [clock],
+  );
   return (
     <div className="transport" role="group" aria-label="Simulation transport">
       <button
@@ -59,7 +66,7 @@ export function Transport({
       </div>
       <span className="transport-time">
         <span className="transport-time-label">t</span>
-        <output aria-label="Simulation time">{time.toFixed(2)}</output>
+        <output ref={time} aria-label="Simulation time" aria-live="off" />
         <span className="transport-time-label">s</span>
       </span>
     </div>
