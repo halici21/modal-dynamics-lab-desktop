@@ -1,0 +1,30 @@
+{
+  "release": "CAD EXPERIENCE R3",
+  "measuredAt": "2026-09-09T12:01:00.046Z",
+  "method": "vite build of commit 963ca83 (pre-R3) in a temporary git worktree sharing node_modules, versus the R3 branch build",
+  "baseline": {
+    "commit": "963ca83",
+    "indexJs": 701850,
+    "indexJsGzip": 215880,
+    "indexCss": 61240,
+    "indexCssGzip": 15470,
+    "threeChunk": 704690,
+    "threeChunkGzip": 181050
+  },
+  "r3": {
+    "indexJs": 742230,
+    "indexJsGzip": 228810,
+    "indexCss": 55160,
+    "indexCssGzip": 13890,
+    "threeChunk": 704690,
+    "threeChunkGzip": 181050
+  },
+  "delta": {
+    "indexJsGzip": 12930,
+    "indexCssGzip": -1580,
+    "eagerGzipTotal": 11350,
+    "eagerGzipPercent": 3.1,
+    "threeChunk": 0
+  },
+  "note": "Three.js remains a separate on-demand chunk in both builds and is byte-identical, so promoting it to the production viewport did not move it into the eager payload. The eager payload grew 11.35 kB gzip: the studio shell, live-mathematics grammar and derivation content, partly offset by retiring app/styles.css."
+}
