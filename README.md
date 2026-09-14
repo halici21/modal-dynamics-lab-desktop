@@ -1,6 +1,6 @@
 # Modal Dynamics Lab
 
-A local-first **Windows desktop application** for learning modal analysis from physical intuition to modal interpretation.
+A local-first **Windows desktop application** for exploring structural dynamics and modal analysis from physical intuition to modal interpretation.
 
 The V1 learning path is intentionally focused:
 
@@ -55,13 +55,13 @@ The final application must be buildable as a Windows executable / installer.
 
 ## Current Status
 
-**Stage:** VISUAL EXPERIENCE R2 (desktop version 0.4.0), built on the validated Full Physics R1 foundation. The latest explicitly authorized scope extends the historical V1 learning path with forcing, FRF, base excitation, spectra, PSD and educational FE. See [R2 completion report](docs/VISUAL_EXPERIENCE_R2_REPORT.md), [R2 design](docs/VISUAL_EXPERIENCE_R2_DESIGN.md), [renderer decision](docs/VISUAL_EXPERIENCE_R2_RENDERER_DECISION.md) and [R2 file inventory](docs/VISUAL_EXPERIENCE_R2_FILES.md). Historical reports remain available.
+**Stage:** PEDAGOGY / COURSE FLOW R1 (desktop version 0.4.0), built on the validated Full Physics R1 and Visual Experience R2 foundations. The current workbench covers SDOF, damping, forcing/FRF, coupled modes, base excitation, participation, Free-Free, response spectrum, random vibration, FEM modal analysis and a local course flow. See the [Pedagogy R1 completion report](docs/PEDAGOGY_R1_REPORT.md), [R2 completion report](docs/VISUAL_EXPERIENCE_R2_REPORT.md) and [documentation index](docs/README.md).
 
-**Validation:** 81 physics/numerical tests and 96 interaction/accessibility/visual tests pass. Independent NumPy/SciPy oracles cover generalized modes, complex FRFs, record spectra, PSD and FE. Native/build outcomes and measured performance are recorded in the [R2 completion report](docs/VISUAL_EXPERIENCE_R2_REPORT.md).
+**Validation:** 89 unit/numerical tests and 121 interaction/accessibility/visual tests pass. Independent NumPy/SciPy oracles cover generalized modes, complex FRFs, record spectra, PSD and FE. Native/build outcomes and measured performance are recorded in the [Pedagogy R1 completion report](docs/PEDAGOGY_R1_REPORT.md) and the current R3 validation records.
 
 Windows development: `npm ci`, then `npm run desktop:dev`.
-Windows packaging: `npm run desktop:build`. Artifacts are written to `artifacts/`.
-Verification: `npm test`, `npm run test:ui`, `npm run typecheck`.
+Windows packaging: `npm run desktop:build`. Artifacts are written to `artifacts/` and are intentionally ignored by Git.
+Verification: `npm test`, `npm run test:ui`, `npm run typecheck`, `npm run build`.
 
 Phase 1 includes analytical undamped free response, SI controls, a draggable mass–spring system, synchronized displacement/energy/phase-space views, linked derivation, inspection and two guided experiments. Phase 2 adds viscous damping, coefficient/ratio authority, three regimes, true decay envelopes, dissipated energy, characteristic roots and two damping experiments. Select DAMPING in the learning trajectory. Phase 3 remains deferred.
 
@@ -259,6 +259,7 @@ modal-dynamics-lab/
 │   └── capabilities/
 │
 ├── tests/
+├── .claude/skills/
 ├── public/
 ├── AGENTS.md
 ├── README.md

@@ -2,6 +2,7 @@
 node_modules/
 
 # Vite / frontend build
+build/
 dist/
 coverage/
 
@@ -40,6 +41,7 @@ test-results/
 .DS_Store
 Thumbs.db
 Desktop.ini
+desktop.ini
 
 # Editors
 .vscode/*
@@ -66,6 +68,8 @@ temp/
 
 # Packaged desktop deliverables
 artifacts/
+*.exe
+*.msi
 
 # Local pre-release backups
 backups/
