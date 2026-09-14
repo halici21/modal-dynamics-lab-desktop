@@ -1,293 +1,152 @@
 # Modal Dynamics Lab
 
-A local-first **Windows desktop application** for exploring structural dynamics and modal analysis from physical intuition to modal interpretation.
+**Interactive Structural Dynamics & Modal Analysis Workbench**
 
-The V1 learning path is intentionally focused:
+[![Source CI](https://github.com/halici21/modal-dynamics-lab-desktop/actions/workflows/ci.yml/badge.svg)](https://github.com/halici21/modal-dynamics-lab-desktop/actions/workflows/ci.yml)
+[![Windows desktop](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows&logoColor=white)](https://github.com/halici21/modal-dynamics-lab-desktop)
+[![Tauri 2](https://img.shields.io/badge/runtime-Tauri%202-24C8DB?logo=tauri&logoColor=111419)](https://tauri.app/)
+[![TypeScript](https://img.shields.io/badge/frontend-TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-\[
-\text{Undamped SDOF}
-\rightarrow
-\text{Damped SDOF}
-\rightarrow
-\text{2DOF}
-\rightarrow
-\text{Mode Shapes}
-\rightarrow
-\text{MDOF}
-\rightarrow
-\text{Free-Free}
-\]
+An interactive Windows desktop workbench for learning and exploring vibration, modal analysis, frequency-response behavior, and educational finite-element dynamics. The application keeps physical motion, equations, matrices, graphs, and mode shapes connected in one offline-first workspace.
 
-The product direction is **Kinetic Scientific Instrument**: a live engineering/scientific application in which motion, equations, matrices, graphs, and mode shapes remain visually and numerically connected.
+![Modal Dynamics Lab 2DOF workbench](.github/assets/hero.png)
 
----
+## What is Modal Dynamics Lab?
 
-## Runtime Target
+Modal Dynamics Lab is a local-first scientific instrument for structural-dynamics study. It is designed for the moment when a learner or engineer wants to move from a physical question to a computed result without losing the connection between them.
 
-This project is a **desktop application, not a website**.
+The current Windows runtime is **Tauri 2 + Vite + React + TypeScript**. Numerical models run in the local TypeScript physics core; the Tauri shell provides the desktop window and native boundary. Core exploration works offline.
 
-Frozen V1 runtime direction:
+## See it in action
 
-```text
-Tauri 2
-└── Vite
-    └── React
-        └── TypeScript
+Each capture is from the current application at a consistent 1440×900 viewport.
+
+<table>
+  <tr>
+    <td><img src=".github/assets/sdof-learning.png" alt="Undamped SDOF learning workspace" width="100%"><br><sub><strong>SDOF / Learn</strong> — a mass–spring system beside its guided question and response.</sub></td>
+    <td><img src=".github/assets/modal-analysis.png" alt="2DOF modal analysis workspace" width="100%"><br><sub><strong>Modal analysis</strong> — a selected mode shape, frequency, normalization and residual in one view.</sub></td>
+  </tr>
+  <tr>
+    <td><img src=".github/assets/free-free.png" alt="Free-Free rigid-body and elastic mode workspace" width="100%"><br><sub><strong>Free-Free</strong> — rigid-body zero frequency and elastic modes share the same model.</sub></td>
+    <td><img src=".github/assets/fem-modal.png" alt="Finite-element modal workspace" width="100%"><br><sub><strong>Educational FEM</strong> — a beam mesh, interpolated mode shape and modal table.</sub></td>
+  </tr>
+</table>
+
+## Core capabilities
+
+**Free vibration**
+
+- Undamped and damped SDOF response
+- Energy, phase-space, decay-envelope and regime views
+
+**Coupled and modal systems**
+
+- 2DOF, 3DOF and 2–10 DOF educational chains
+- Generalized eigenvalues/eigenvectors, mode shapes, normalization and sign handling
+- Modal superposition, MAC and residual diagnostics
+
+**Frequency and input behavior**
+
+- Forced SDOF response and complex FRF views
+- Uniform base excitation, participation and effective modal mass
+
+**Environmental dynamics**
+
+- Response-spectrum fundamentals
+- Stationary PSD and RMS interpretation
+
+**Free-Free systems**
+
+- Rigid-body modes at approximately zero frequency
+- Elastic modes and conceptual rigid-body bases
+
+**Educational finite elements**
+
+- Axial bar, Euler–Bernoulli beam and planar-frame models
+- Element matrices, global assembly, boundary conditions and mesh refinement
+
+## Learning path
+
+The local course flow is compact by design:
+
+`SDOF → Damping → Forced Response → FRF → Coupled Systems → Modes → Base Excitation → Free-Free → Spectra / PSD → FEM`
+
+The same workbench can be used in **Learn**, **Explore** or **Inspect** mode. Learn asks for a prediction before revealing the relationship; Explore keeps direct manipulation; Inspect exposes matrices, residuals, normalization and solver evidence.
+
+## Numerical credibility
+
+- `89/89` unit and numerical tests pass.
+- `121/121` interaction, accessibility and visual tests pass on the validated Windows baseline.
+- Analytical reference cases cover SDOF, damping, forced response, FRF, modal response, free-free zeros and FE convergence.
+- Independent NumPy/SciPy oracle fixtures validate generalized modes, complex FRFs, spectra, PSD and finite-element results.
+- Physics, animation, visualization, UI state and native desktop responsibilities remain separated.
+
+See the [full physics report](docs/FULL_PHYSICS_R1_REPORT.md), [pedagogy report](docs/PEDAGOGY_R1_REPORT.md) and [documentation index](docs/README.md) for the evidence trail.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    P[Physics Core\nM/C/K, modal solvers, FEM] --> S[SimulationClock\nelapsed simulation time]
+    S --> V[Visualization\nSVG, Canvas, Three.js]
+    V --> W[React Workbench\nLearn · Explore · Inspect]
+    W --> T[Tauri 2\nWindows desktop shell]
 ```
 
-Tauri provides the Windows desktop shell and native integration.  
-The frontend is rendered locally inside the desktop application.
+The visualization layer consumes solved physical values; it does not invent motion. The native layer stays narrow so the core remains testable and offline.
 
-Core V1 functionality must work **offline**.
+## Quick start
 
-Do not introduce:
+Windows development requires Node.js and the Rust toolchain used by Tauri.
 
-- Next.js,
-- SSR,
-- server routes,
-- Vercel assumptions,
-- browser-hosted deployment architecture,
-- mandatory cloud services.
-
-The final application must be buildable as a Windows executable / installer.
-
----
-
-## Current Status
-
-**Stage:** PEDAGOGY / COURSE FLOW R1 (desktop version 0.4.0), built on the validated Full Physics R1 and Visual Experience R2 foundations. The current workbench covers SDOF, damping, forcing/FRF, coupled modes, base excitation, participation, Free-Free, response spectrum, random vibration, FEM modal analysis and a local course flow. See the [Pedagogy R1 completion report](docs/PEDAGOGY_R1_REPORT.md), [R2 completion report](docs/VISUAL_EXPERIENCE_R2_REPORT.md) and [documentation index](docs/README.md).
-
-**Validation:** 89 unit/numerical tests and 121 interaction/accessibility/visual tests pass. Independent NumPy/SciPy oracles cover generalized modes, complex FRFs, record spectra, PSD and FE. Native/build outcomes and measured performance are recorded in the [Pedagogy R1 completion report](docs/PEDAGOGY_R1_REPORT.md) and the current R3 validation records.
-
-Windows development: `npm ci`, then `npm run desktop:dev`.
-Windows packaging: `npm run desktop:build`. Artifacts are written to `artifacts/` and are intentionally ignored by Git.
-Verification: `npm test`, `npm run test:ui`, `npm run typecheck`, `npm run build`.
-
-Phase 1 includes analytical undamped free response, SI controls, a draggable mass–spring system, synchronized displacement/energy/phase-space views, linked derivation, inspection and two guided experiments. Phase 2 adds viscous damping, coefficient/ratio authority, three regimes, true decay envelopes, dissipated energy, characteristic roots and two damping experiments. Select DAMPING in the learning trajectory. Phase 3 remains deferred.
-
-Before writing production code, read all authoritative documents under [`docs/`](./docs/).
-
----
-
-## Authoritative Specifications
-
-1. [`docs/PRODUCT_SPEC_V1.md`](./docs/PRODUCT_SPEC_V1.md)  
-   Defines **what the product does**: scope, physics, modules, equations, numerical behavior, validation, edge cases, and phase plan.
-
-2. [`docs/VISUAL_MOTION_SPEC_V1.md`](./docs/VISUAL_MOTION_SPEC_V1.md)  
-   Defines **how the product looks, moves, and responds**: visual system, animation architecture, interaction design, graph behavior, performance rules, accessibility, and UI acceptance criteria.
-
-3. [`docs/ASTRA_SKILL_MATRIX_V1.md`](./docs/ASTRA_SKILL_MATRIX_V1.md)  
-   Defines **which engineering/design competencies own which decisions** and how work should be routed and validated phase by phase.
-
-4. [`docs/DESKTOP_RUNTIME_SPEC_V1.md`](./docs/DESKTOP_RUNTIME_SPEC_V1.md)  
-   Defines the **Windows/Tauri runtime, packaging, offline, DPI, window lifecycle, and native-shell requirements**.
-
-The repository-level [`AGENTS.md`](./AGENTS.md) defines implementation rules for coding agents.
-
-A ready-to-use first implementation prompt is provided at:
-
-[`docs/PHASE_0_IMPLEMENTATION_PROMPT.md`](./docs/PHASE_0_IMPLEMENTATION_PROMPT.md)
-
----
-
-## Specification Precedence
-
-If implementation choices conflict with the specifications:
-
-1. Physics correctness and frozen V1 scope in `PRODUCT_SPEC_V1.md` take precedence.
-2. `DESKTOP_RUNTIME_SPEC_V1.md` governs desktop runtime, packaging, lifecycle, offline behavior, and native integration.
-3. `VISUAL_MOTION_SPEC_V1.md` governs interaction, visual, animation, accessibility, and performance behavior.
-4. `ASTRA_SKILL_MATRIX_V1.md` governs implementation responsibility, verification flow, and quality gates.
-5. `AGENTS.md` governs repository workflow.
-
-If two specifications appear genuinely contradictory, do not silently choose one. Record the conflict and resolve it before implementation continues.
-
----
-
-## Product Principles
-
-> **Nothing moves without meaning.**
-
-> **Nothing mathematical exists without a physical referent.**
-
-The application must not become:
-
-- a generic AI dashboard,
-- a collection of disconnected cards,
-- a static textbook,
-- a decorative animation demo,
-- a replacement for a production FEM solver,
-- a web-first SaaS product.
-
-The Physics Stage is the center of the experience.
-
----
-
-## V1 Scope
-
-V1 includes:
-
-- Undamped SDOF
-- Damped SDOF
-- 2DOF coupled systems
-- Eigenvalue/eigenvector derivation
-- Mode shapes and normalization
-- Simple modal superposition
-- 3–10 DOF educational MDOF systems
-- Free-free rigid-body modes
-- 3D free-free six-DOF concept
-- Graph scrubbing
-- Freeze & Inspect
-- Energy and phase-space lenses
-- Equation ↔ geometry linking
-- Animated matrix assembly
-- A/B parameter comparison
-- Responsive desktop-window behavior
-- Keyboard-accessible interactions
-- Numerical, interaction, visual, desktop-runtime, and performance validation
-
-V1 explicitly excludes full FEM, ANSYS integration, harmonic response, FRF as a full module, random vibration, response spectrum, nonlinear systems, and complex/non-proportional modal analysis.
-
----
-
-## Development Phases
-
-- **Phase 0** — Desktop foundation / architecture / animation shell
-- **Phase 1** — Undamped SDOF
-- **Phase 2** — Damped SDOF
-- **Phase 3** — 2DOF
-- **Phase 4** — Mode Shape Lab
-- **Phase 5** — MDOF
-- **Phase 6** — Free-Free
-- **Phase 7** — Validation & polish
-
-Do not implement later phases early merely because they are convenient.
-
----
-
-## Core Architecture Rule
-
-\[
-\boxed{
-\text{Physics Engine}
-\neq
-\text{Animation Engine}
-\neq
-\text{UI State}
-\neq
-\text{Native Desktop Layer}
-}
-\]
-
-Preferred flow:
-
-```text
-physics parameters
-        ↓
-derived physical solution
-        ↓
-single requestAnimationFrame simulation clock
-        ↓
-SVG / Canvas visual transforms
-        ↓
-Tauri desktop shell
+```powershell
+git clone https://github.com/halici21/modal-dynamics-lab-desktop.git
+cd modal-dynamics-lab-desktop
+npm ci
 ```
 
-The visualization layer must never invent physics.
+For fast frontend iteration:
 
----
-
-## Desktop-Specific Requirements
-
-V1 must support:
-
-- Windows desktop execution,
-- Tauri 2 shell,
-- offline core functionality,
-- production desktop build,
-- window resize,
-- Windows DPI scaling,
-- multi-monitor movement without blurry Canvas rendering,
-- minimize / restore lifecycle without runaway background animation,
-- native-safe keyboard shortcuts,
-- future-ready file-dialog / save-project architecture without requiring those features in V1.
-
-The app should feel like a scientific desktop instrument, not a browser tab inside a wrapper.
-
----
-
-## Performance Targets
-
-- 60 FPS-class continuous interaction
-- normal frame budget below ~16.7 ms
-- input-to-visual latency below ~50 ms
-- no duplicated `requestAnimationFrame` loops
-- no progressive listener / memory leaks
-- no full graph rebuild every animation frame
-- stable behavior during rapid slider interaction
-- stable window resizing
-- correct behavior on high-refresh displays
-- no unnecessary background CPU usage when minimized/inactive
-
----
-
-## Repository Structure
-
-```text
-modal-dynamics-lab/
-├── docs/
-│   ├── PRODUCT_SPEC_V1.md
-│   ├── VISUAL_MOTION_SPEC_V1.md
-│   ├── ASTRA_SKILL_MATRIX_V1.md
-│   ├── DESKTOP_RUNTIME_SPEC_V1.md
-│   ├── PHASE_0_IMPLEMENTATION_PROMPT.md
-│   └── README.md
-│
-├── src/
-│   ├── app/
-│   ├── components/
-│   ├── features/
-│   ├── physics/
-│   ├── animation/
-│   ├── visualization/
-│   └── education/
-│
-├── src-tauri/
-│   ├── src/
-│   ├── icons/
-│   └── capabilities/
-│
-├── tests/
-├── .claude/skills/
-├── public/
-├── AGENTS.md
-├── README.md
-└── .gitignore
+```powershell
+npm run dev
 ```
 
-Framework-generated files such as `package.json`, `vite.config.ts`, `Cargo.toml`, and `tauri.conf.json` are created during Phase 0.
+For the actual Tauri desktop window:
 
----
+```powershell
+npm run desktop:dev
+```
 
-## Implementation Entry Point
+## Development and testing
 
-Start with **Phase 0 only**.
+```powershell
+npm test
+npm run test:ui
+npm run typecheck
+npm run build
+```
 
-1. Read `README.md`.
-2. Read `AGENTS.md`.
-3. Read all authoritative V1 specifications.
-4. Read `docs/PHASE_0_IMPLEMENTATION_PROMPT.md`.
-5. Audit the repository.
-6. Produce a concise architecture plan.
-7. Implement Phase 0.
-8. Validate Phase 0 against its acceptance gate.
-9. Historical Phase 0 stop point; the authorized Phase 2 increment is documented in docs/V2_REPORT.md.
+`npm run desktop:build` also compiles the native release executable. Local NSIS packaging currently encounters a Windows reparse-point error (`os error 4395`); no installer is committed or uploaded. Packaging output is written to the ignored `artifacts/` directory.
 
----
+## Documentation
+
+Start with the [documentation index](docs/README.md). It routes public readers to:
+
+- [Architecture](docs/FULL_PHYSICS_R1_ARCHITECTURE.md) and [numerics](docs/FULL_PHYSICS_R1_NUMERICS.md)
+- [Finite-element models](docs/FULL_PHYSICS_R1_FEM.md)
+- [Pedagogy and course flow](docs/PEDAGOGY_R1_REPORT.md)
+- [Validation and test matrix](docs/FULL_PHYSICS_R1_TEST_MATRIX.md)
+- [Visual/runtime specifications](docs/VISUAL_MOTION_SPEC_V1.md) and [desktop runtime](docs/DESKTOP_RUNTIME_SPEC_V1.md)
+- Historical implementation and release reports, kept under `docs/` for traceability
+
+## Project status
+
+The public repository tracks the validated `0.4.0` desktop workbench: full linear dynamics and educational FEM foundations, the Visual Experience R2 shell, and the Pedagogy / Course Flow R1 layer. This presentation pass changes documentation, screenshots and repository automation only; it does not change physics or product behavior.
 
 ## License
 
-No license has been selected yet.
+No project license has been selected yet. A license should be chosen before external redistribution is expected.
 
+## Acknowledgements
 
+The runtime uses [Tauri](https://tauri.app/), [React](https://react.dev/), [Vite](https://vite.dev/), [Three.js](https://threejs.org/), [ml-matrix](https://github.com/mljs/matrix), [KaTeX](https://katex.org/) and [Playwright](https://playwright.dev/). NumPy and SciPy are used as development-time numerical oracles; they are not required by the desktop application at runtime.

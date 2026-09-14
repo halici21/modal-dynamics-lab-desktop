@@ -1,0 +1,31 @@
+name: Windows Tauri build
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  desktop:
+    name: Native release build (manual)
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the Tauri desktop release
+        run: npm run desktop:build
+
+      - name: State distribution policy
+        run: echo "Build evidence only; no release or binary upload is performed."
